@@ -1,13 +1,24 @@
 package com.omrobbie.worldweather;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHolder> {
 
-    private LayoutInflater mInflater;
+    private ArrayList<HashMap<String, String>> data = new ArrayList<>();
+    private LayoutInflater inflater;
+
+    /* setup constructor untuk class WeatherAdapter */
+    public WeatherAdapter(Context context, ArrayList<HashMap<String, String>> data) {
+        this.inflater = LayoutInflater.from(context);
+        this.data = data;
+    }
 
     /**
      * Called when RecyclerView needs a new {@link ViewHolder} of the given type to represent
@@ -31,13 +42,17 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
      */
     @Override
     public WeatherAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.weather_listitems, parent, false);
+        View view = inflater.inflate(R.layout.weather_listitems, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
-    /* setup inner class view dari inflater listitem layout */
+    /* setup inner class view untuk inflater listitem layout */
     private class ViewHolder {
 
+        /* setup constructor untuk inner class ViewHolder */
+        public ViewHolder(View view) {
+            super();
+        }
     }
 }
