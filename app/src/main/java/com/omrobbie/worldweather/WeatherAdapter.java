@@ -5,11 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHolder> {
 
@@ -43,7 +44,7 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
      * @see #onBindViewHolder(ViewHolder, int)
      */
     @Override
-    public WeatherAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.weather_listitems, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
@@ -79,6 +80,10 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         HashMap<String, String> item = data.get(position);
+
+        /* masukkan data ke semua komponen */
+        holder.txtCountry.setText(item.get("name") + "(" + item.get("capital") + ")");
+        holder.txtWeather.setText(item.get("description") + ", " + item.get("temp"));
     }
 
     /**
@@ -92,11 +97,22 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
     }
 
     /* setup inner class view untuk inflater listitem layout */
-    private class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
+
+        public ImageView imgFlag;
+        public TextView txtCountry;
+        public ImageView imgWeather;
+        public TextView txtWeather;
 
         /* setup constructor untuk inner class ViewHolder */
         public ViewHolder(View itemView) {
             super(itemView);
+
+            /* deklarasikan semua komponen yang dipakai di dalam layout */
+            imgFlag = (ImageView) itemView.findViewById(R.id.imgFlag);
+            txtCountry = (TextView) itemView.findViewById(R.id.txtCountry);
+            imgWeather = (ImageView) itemView.findViewById(R.id.imgWeather);
+            txtWeather = (TextView) itemView.findViewById(R.id.txtWeather);
         }
     }
 }
