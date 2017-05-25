@@ -44,9 +44,9 @@ public class Weather extends AppCompatActivity {
         /* API Source: https://restcountries.eu/rest/v2/all*/
         tmp = new HashMap<>();
         tmp.put("alpha2Code", "US");
-        tmp.put("flag", "https://restcountries.eu/data/idn.svg");
-        tmp.put("name", "United States");
-        tmp.put("capital", "Washington D.C");
+        tmp.put("flag", "https://restcountries.eu/data/usa.svg");
+        tmp.put("name", "United States of America");
+        tmp.put("capital", "Washington, D.C.");
 
         /* API Source: http://openweathermap.org/api */
         tmp.put("icon", "09d");
