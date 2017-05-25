@@ -82,7 +82,7 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
         HashMap<String, String> item = data.get(position);
 
         /* masukkan data ke semua komponen */
-        holder.txtCountry.setText(item.get("name") + "(" + item.get("capital") + ")");
+        holder.txtCountry.setText(item.get("name") + " (" + item.get("capital") + ")");
         holder.txtWeather.setText(item.get("description") + ", " + item.get("temp"));
     }
 
