@@ -5,5 +5,70 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.omrobbie.worldweather.AuthActivity">
-    
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@color/colorPrimary"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imgUserAvatar"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="50dp"
+                android:src="@drawable/weather_icon"
+                android:layout_centerHorizontal="true"/>
+
+            <EditText
+                android:id="@+id/txtUserName"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:lines="1"
+                android:hint="Username"
+                android:textSize="16sp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/imgUserAvatar"/>
+
+            <EditText
+                android:id="@+id/txtUserPassword"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:hint="Password"
+                android:textSize="16sp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/txtUserName"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/txtUserPassword">
+
+                <Button
+                    android:id="@+id/btnUserLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Login"/>
+
+                <Button
+                    android:id="@+id/btnUserSwitch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Switch User"
+                    android:layout_toRightOf="@id/btnUserLogin"/>
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>
