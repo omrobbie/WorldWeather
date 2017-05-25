@@ -78,6 +78,7 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
      */
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        HashMap<String, String> item = data.get(position);
     }
 
     /**
@@ -87,7 +88,7 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
      */
     @Override
     public int getItemCount() {
-        return 0;
+        return data.size();
     }
 
     /* setup inner class view untuk inflater listitem layout */
