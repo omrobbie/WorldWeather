@@ -68,3 +68,8 @@ Dengan memanfaatkan fungsi dari [AndroidSVG](https://bigbadaboom.github.io/andro
 * [Source dot_dot_dot](https://github.com/bumptech/glide/blob/master/samples/svg/src/main/res/drawable/dot_dot_dot.xml "Source dot_dot_dot")
 * [Source image_error](https://github.com/bumptech/glide/blob/master/samples/svg/src/main/res/drawable/image_error.xml "Source image_error")
 * [Source image_loading](https://github.com/bumptech/glide/blob/master/samples/svg/src/main/res/drawable/image_loading.xml "Source image_loading")
+
+---
+
+## Load gambar bulat :
+Tutorial untuk membuat gambar pada ImageView agar menjadi bulat, bisa dilihat di artikel [Induce Smile](https://inducesmile.com/android/how-to-make-circular-imageview-and-rounded-corner-imageview-in-android/ "How to make circular imageview and rounded corner imageview in android").
