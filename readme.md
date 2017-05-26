@@ -63,6 +63,6 @@ Dengan memanfaatkan fungsi dari [AndroidSVG](https://bigbadaboom.github.io/andro
 * [Source SvgSoftwareLayerSetter](https://github.com/bumptech/glide/blob/master/samples/svg/src/main/java/com/bumptech/glide/samples/svg/SvgSoftwareLayerSetter.java "Source SvgSoftwareLayerSetter")
 
 **2. Daftar file drawable :**
-*[Source dot_dot_dot](https://github.com/bumptech/glide/blob/master/samples/svg/src/main/res/drawable/dot_dot_dot.xml "Source dot_dot_dot")
-*[Source image_error](https://github.com/bumptech/glide/blob/master/samples/svg/src/main/res/drawable/image_error.xml "Source image_error")
-*[Source image_loading](https://github.com/bumptech/glide/blob/master/samples/svg/src/main/res/drawable/image_loading.xml "Source image_loading")
+* [Source dot_dot_dot](https://github.com/bumptech/glide/blob/master/samples/svg/src/main/res/drawable/dot_dot_dot.xml "Source dot_dot_dot")
+* [Source image_error](https://github.com/bumptech/glide/blob/master/samples/svg/src/main/res/drawable/image_error.xml "Source image_error")
+* [Source image_loading](https://github.com/bumptech/glide/blob/master/samples/svg/src/main/res/drawable/image_loading.xml "Source image_loading")
