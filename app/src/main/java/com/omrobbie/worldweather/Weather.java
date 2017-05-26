@@ -4,13 +4,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import static android.R.attr.y;
 
-public class Weather extends AppCompatActivity {
+public class Weather extends AppCompatActivity implements WeatherAdapter.ItemClickListener {
 
     private WeatherAdapter adapter;
     private ArrayList<HashMap<String, String>> data;
@@ -61,9 +62,17 @@ public class Weather extends AppCompatActivity {
         /* setup adapter */
         adapter = new WeatherAdapter(this, data);
 
+        /* setup item click listener */
+        adapter.setItemClickListener(this);
+
         /* masukkan data ke adapter */
         RecyclerView weatherList = (RecyclerView) findViewById(R.id.WeatherList);
         weatherList.setLayoutManager(new LinearLayoutManager(this));
         weatherList.setAdapter(adapter);
+    }
+
+    /* implementasikan onItemClick dari WeatherAdapter */
+    @Override
+    public void onItemClick(View view, int position) {
     }
 }
