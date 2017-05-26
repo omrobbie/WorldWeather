@@ -20,6 +20,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -47,45 +51,8 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
         txtAddress.setText(sharedPreferences.getString("address", ""));
         Glide.with(this).load(sharedPreferences.getString("image", "")).into(imgUserAvatar);
 
-        /* deklarasi data array */
-        data = new ArrayList<>();
-
-        /* deklarasi data hashmap */
-        HashMap<String, String> tmp = new HashMap<>();
-
-        /* setup dummy data */
-        /* API Source: https://restcountries.eu/rest/v2/all*/
-        tmp.put("alpha2Code", "ID");
-        tmp.put("flag", "https://restcountries.eu/data/idn.svg");
-        tmp.put("name", "Indonesia");
-        tmp.put("capital", "Jakarta");
-        tmp.put("nativeName", "Bahasa Indonesia");
-
-        /* API Source: http://openweathermap.org/api */
-        tmp.put("icon", "http://openweathermap.org/img/w/" + "09d" + ".png");
-        tmp.put("description", "light intensity drizzle");
-        tmp.put("temp", "280.32");
-        tmp.put("speed", "4.1");
-
-        /* masukkan ke data array */
-        data.add(tmp);
-
-        /* API Source: https://restcountries.eu/rest/v2/all */
-        tmp = new HashMap<>();
-        tmp.put("alpha2Code", "US");
-        tmp.put("flag", "https://restcountries.eu/data/usa.svg");
-        tmp.put("name", "United States of America");
-        tmp.put("capital", "Washington, D.C.");
-        tmp.put("nativeName", "English");
-
-        /* API Source: http://openweathermap.org/api */
-        tmp.put("icon", "http://openweathermap.org/img/w/" + "04n" + ".png");
-        tmp.put("description", "cloudy");
-        tmp.put("temp", "230.71");
-        tmp.put("speed", "3.8");
-
-        /* masukkan ke data array */
-        data.add(tmp);
+        /* panggil fungsi untuk mengambil data API */
+        getJSONData();
 
         /* setup adapter */
         adapter = new WeatherAdapter(this, data);
@@ -142,16 +109,55 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
     /* buat fungsi untuk mendapatkan data JSON dari link API */
     private void getJSONData() {
 
+        /* kosongkan isi data array */
+        data = new ArrayList<>();
+
         /* deklarasi penggunaan volley untuk REST Countries API */
         RequestQueue requestQueueCountries = Volley.newRequestQueue(this);
         String urlAPI = "https://restcountries.eu/rest/v2/all";
 
         /* meminta respon berupa string dari urlAPI */
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, urlAPI,
+        StringRequest stringRequestCountries = new StringRequest(Request.Method.GET, urlAPI,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
+                        /* deklarasi response dari request REST Countries API */
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+
+                            /* ambil keseluruhan data dari response */
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject item = (JSONObject) jsonArray.get(i);
+
+                                /* deklarasi variable penyimpanan data item sementara */
+                                String hash_alpha2Code = item.getString("alpha2Code").toString();
+                                String hash_flag = item.getString("flag");
+                                String hash_name = item.getString("name");
+                                String hash_capital = item.getString("capital");
+                                String hash_nativeName = item.getString("nativeName");
+
+                                /* deklarasi variable penyimpanan array sementara */
+                                HashMap<String, String> tmp = new HashMap<>();
+
+                                tmp.put("alpha2Code", hash_alpha2Code);
+                                tmp.put("flag", hash_flag);
+                                tmp.put("name", hash_name);
+                                tmp.put("capital", hash_capital);
+                                tmp.put("nativeName", hash_nativeName);
+
+                                tmp.put("icon", "http://openweathermap.org/img/w/" + "09d" + ".png");
+                                tmp.put("description", "light intensity drizzle");
+                                tmp.put("temp", "280.32");
+                                tmp.put("speed", "4.1");
+
+                                /* masukkan ke data array */
+                                data.add(tmp);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 },
 
@@ -162,5 +168,8 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
                     }
                 }
         );
+
+        /* masukkan data request kedalam request queue */
+        requestQueueCountries.add(stringRequestCountries);
     }
 }
