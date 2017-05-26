@@ -56,6 +56,7 @@ Dengan memanfaatkan fungsi dari [AndroidSVG](https://bigbadaboom.github.io/andro
 ```
 
 **Salin file berikut dari github [Glide - Image loading framework](https://github.com/bumptech/glide "View Glide options on github") di folder `sample/svg/` :**
+
 **1. Daftar file activity :**
 * [Source SvgDecoder](https://github.com/bumptech/glide/blob/master/samples/svg/src/main/java/com/bumptech/glide/samples/svg/SvgDecoder.java "Source SvgDecoder")
 * [Source SvgDrawableTranscoder](https://github.com/bumptech/glide/blob/master/samples/svg/src/main/java/com/bumptech/glide/samples/svg/SvgDrawableTranscoder.java "Source SvgDrawableTranscoder")
