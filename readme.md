@@ -11,6 +11,7 @@ Aplikasi ini berfungsi untuk menunjukkan cuaca terkini dari berbagai negara deng
 * [Java Development Kit](http://www.oracle.com/technetwork/java/javase/downloads/index.html "Download JDK")
 * [Glide - Image loading framework](https://github.com/bumptech/glide "View Glide options on github")
 * [AndroidSVG](https://bigbadaboom.github.io/androidsvg/ "Check AndroidSVG documentation")
+* [Volley](https://developer.android.com/training/volley/index.html "Transmitting network data using volley")
 
 ### Data API :
 * [Random User Generator](https://randomuser.me/api/ "Generate random user")
