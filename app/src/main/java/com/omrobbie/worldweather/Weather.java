@@ -10,7 +10,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
@@ -63,7 +70,7 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
         /* masukkan ke data array */
         data.add(tmp);
 
-        /* API Source: https://restcountries.eu/rest/v2/all*/
+        /* API Source: https://restcountries.eu/rest/v2/all */
         tmp = new HashMap<>();
         tmp.put("alpha2Code", "US");
         tmp.put("flag", "https://restcountries.eu/data/usa.svg");
@@ -130,5 +137,30 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
 
         /* jalankan intent */
         startActivity(intent);
+    }
+
+    /* buat fungsi untuk mendapatkan data JSON dari link API */
+    private void getJSONData() {
+
+        /* deklarasi penggunaan volley untuk REST Countries API */
+        RequestQueue requestQueueCountries = Volley.newRequestQueue(this);
+        String urlAPI = "https://restcountries.eu/rest/v2/all";
+
+        /* meminta respon berupa string dari urlAPI */
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, urlAPI,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                    }
+                },
+
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(Weather.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
     }
 }
