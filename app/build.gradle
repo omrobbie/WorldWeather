@@ -32,4 +32,8 @@ dependencies {
 
     /* panggil glide untuk menampilkan gambar di ImageView dari hyperlink */
     compile 'com.github.bumptech.glide:glide:4.0.0-RC0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC0'
+
+    /* panggil androidsvg untuk menampilkan gambar SVG */
+    compile 'com.caverock:androidsvg:1.2.1'
 }

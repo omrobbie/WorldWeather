@@ -1,6 +1,8 @@
 package com.omrobbie.worldweather;
 
 import android.content.Context;
+import android.graphics.drawable.PictureDrawable;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,18 +11,34 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHolder> {
 
     private ArrayList<HashMap<String, String>> data = new ArrayList<>();
     private LayoutInflater inflater;
+    private Context context;
+    private RequestBuilder<PictureDrawable> requestBuilder;
 
     /* setup constructor untuk class WeatherAdapter */
     public WeatherAdapter(Context context, ArrayList<HashMap<String, String>> data) {
         this.inflater = LayoutInflater.from(context);
         this.data = data;
+        this.context = context;
+
+        /* setup Glide agar bisa membaca format SVG */
+        requestBuilder = GlideApp.with(context)
+                .as(PictureDrawable.class)
+                .placeholder(R.drawable.image_loading)
+                .error(R.drawable.image_error)
+                .transition(withCrossFade())
+                .listener(new SvgSoftwareLayerSetter());
     }
 
     /**
@@ -82,7 +100,9 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
         HashMap<String, String> item = data.get(position);
 
         /* masukkan data ke semua komponen */
+        requestBuilder.load(Uri.parse(item.get("flag"))).into(holder.imgFlag);
         holder.txtCountry.setText(item.get("name") + " (" + item.get("capital") + ")");
+        Glide.with(context).load(item.get("icon")).into(holder.imgWeather);
         holder.txtWeather.setText(item.get("description") + ", " + item.get("temp"));
     }
 

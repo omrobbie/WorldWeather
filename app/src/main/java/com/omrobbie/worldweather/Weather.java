@@ -34,7 +34,7 @@ public class Weather extends AppCompatActivity {
         tmp.put("capital", "Jakarta");
 
         /* API Source: http://openweathermap.org/api */
-        tmp.put("icon", "09d");
+        tmp.put("icon", "http://openweathermap.org/img/w/" + "09d" + ".png");
         tmp.put("description", "light intensity drizzle");
         tmp.put("temp", "280.32");
 
@@ -49,7 +49,7 @@ public class Weather extends AppCompatActivity {
         tmp.put("capital", "Washington, D.C.");
 
         /* API Source: http://openweathermap.org/api */
-        tmp.put("icon", "09d");
+        tmp.put("icon", "http://openweathermap.org/img/w/" + "04n" + ".png");
         tmp.put("description", "cloudy");
         tmp.put("temp", "230.71");
 
