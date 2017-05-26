@@ -1,6 +1,8 @@
 package com.omrobbie.worldweather;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -94,6 +96,11 @@ public class AuthActivity extends AppCompatActivity {
                         txtUserName.setText(name.get("first") + " " + name.get("last"));
                         txtUserPassword.setText(login.get("password").toString());
                         Glide.with(AuthActivity.this).load(picture.get("medium")).into(imgUserAvatar);
+
+                        /* bikin gambar pada ImageView menjadi bulat */
+                        Bitmap bitmap = BitmapFactory.decodeResource(AuthActivity.this.getResources(), R.drawable.weather_icon);
+                        Bitmap circularBitmap = ImageConverter.getRoundedCornerBitmap(bitmap, 100);
+                        imgUserAvatar.setImageResource(circularBitmap.getGenerationId());
 
                     } catch (JSONException e) {
                         e.printStackTrace();
