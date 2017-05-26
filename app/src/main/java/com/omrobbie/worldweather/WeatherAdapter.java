@@ -25,7 +25,7 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
     private LayoutInflater inflater;
     private Context context;
     private RequestBuilder<PictureDrawable> requestBuilder;
-    private ItemClickListener clickListener;
+    private ItemClickListener itemClickListener;
 
     /* setup constructor untuk class WeatherAdapter */
     public WeatherAdapter(Context context, ArrayList<HashMap<String, String>> data) {
@@ -149,12 +149,17 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
          */
         @Override
         public void onClick(View v) {
-            if(clickListener != null) clickListener.onItemClick(v, getAdapterPosition());
+            if(itemClickListener != null) itemClickListener.onItemClick(v, getAdapterPosition());
         }
     }
 
     /* deklarasi interface untuk clickListener */
     public interface ItemClickListener {
         void onItemClick(View view, int position);
+    }
+
+    /* deklarasi setter event saat di klik*/
+    public void setItemClickListener(ItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
     }
 }
