@@ -7,9 +7,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class AuthActivity extends AppCompatActivity {
 
@@ -55,6 +64,32 @@ public class AuthActivity extends AppCompatActivity {
         String urlAPI = "https://randomuser.me/api/";
 
         /* meminta respon berupa string dari urlAPI */
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, urlAPI,
+            new Response.Listener<String>() {
+                /**
+                 * Called when a response is received.
+                 *
+                 * @param response
+                 */
+                @Override
+                public void onResponse(String response) {
+                    
+                }
+            },
+
+            new Response.ErrorListener() {
+                /**
+                 * Callback method that an error has been occurred with the
+                 * provided error code and optional user-readable message.
+                 *
+                 * @param error
+                 */
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(AuthActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        );
 
         /* masukkan data random user ke komponen */
         txtUserName.setText("omrobbie");
