@@ -40,4 +40,7 @@ dependencies {
 
     /* panggil volley untuk membaca data REST API JSON */
     compile 'com.android.volley:volley:1.0.0'
+
+    /* panggil circleimageview untuk membuat gambar pada imageview menjadi bulat */
+    compile 'de.hdodenhof:circleimageview:1.2.1'
 }
