@@ -26,7 +26,7 @@ Aplikasi ini berfungsi untuk menunjukkan cuaca terkini dari berbagai negara deng
 API [REST Countries](https://restcountries.eu/rest/v2/all "Generate all countries data") memberikan link berupa gambar bendera dalam vector, sedangkan di android tidak mengenali tipe SVG secara default.
 
 Berikut adalah contoh gambar vector :
-![Negara Kesatuan Republik Indonesia](https://restcountries.eu/data/idn.svg)
+<kbd>![Negara Kesatuan Republik Indonesia](https://restcountries.eu/data/idn.svg)</kbd>
 
 Dengan memanfaatkan fungsi dari [AndroidSVG](https://bigbadaboom.github.io/androidsvg/ "Check AndroidSVG documentation") dan [Glide - Image loading framework](https://github.com/bumptech/glide "View Glide options on github"), kita dapat menampilkan gambar vector dengan cara seperti ini :
 
