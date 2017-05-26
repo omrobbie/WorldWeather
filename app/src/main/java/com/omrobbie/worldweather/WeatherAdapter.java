@@ -103,7 +103,8 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
         requestBuilder.load(Uri.parse(item.get("flag"))).into(holder.imgFlag);
         holder.txtCountry.setText(item.get("name") + " (" + item.get("capital") + ")");
         Glide.with(context).load(item.get("icon")).into(holder.imgWeather);
-        holder.txtWeather.setText(item.get("description") + ", " + item.get("temp"));
+        holder.txtWeather.setText(item.get("description"));
+        holder.txtTemperature.setText("Temp: " + item.get("temp") + " | Wind: " + item.get("speed"));
     }
 
     /**
@@ -123,6 +124,7 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
         public TextView txtCountry;
         public ImageView imgWeather;
         public TextView txtWeather;
+        public TextView txtTemperature;
 
         /* setup constructor untuk inner class ViewHolder */
         public ViewHolder(View itemView) {
@@ -133,6 +135,7 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
             txtCountry = (TextView) itemView.findViewById(R.id.txtCountry);
             imgWeather = (ImageView) itemView.findViewById(R.id.imgWeather);
             txtWeather = (TextView) itemView.findViewById(R.id.txtWeather);
+            txtTemperature = (TextView) itemView.findViewById(R.id.txtTemperature);
         }
     }
 }

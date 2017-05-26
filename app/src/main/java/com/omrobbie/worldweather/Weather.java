@@ -37,6 +37,7 @@ public class Weather extends AppCompatActivity {
         tmp.put("icon", "http://openweathermap.org/img/w/" + "09d" + ".png");
         tmp.put("description", "light intensity drizzle");
         tmp.put("temp", "280.32");
+        tmp.put("speed", "4.1");
 
         /* masukkan ke data array */
         data.add(tmp);
@@ -52,6 +53,7 @@ public class Weather extends AppCompatActivity {
         tmp.put("icon", "http://openweathermap.org/img/w/" + "04n" + ".png");
         tmp.put("description", "cloudy");
         tmp.put("temp", "230.71");
+        tmp.put("speed", "3.8");
 
         /* masukkan ke data array */
         data.add(tmp);
