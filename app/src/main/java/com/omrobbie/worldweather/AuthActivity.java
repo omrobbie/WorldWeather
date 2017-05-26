@@ -1,6 +1,7 @@
 package com.omrobbie.worldweather;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
@@ -26,8 +27,8 @@ import org.json.JSONObject;
 public class AuthActivity extends AppCompatActivity {
 
     ImageView imgUserAvatar;
-    TextView txtUserName;
-    TextView txtUserPassword;
+    TextView txtUserName, txtUserPassword;
+    String txtEmail, txtAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +45,17 @@ public class AuthActivity extends AppCompatActivity {
         btnUserLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AuthActivity.this, Weather.class);
-                startActivity(intent);
+                /* deklarasi SharedPreferences */
+                final SharedPreferences.Editor sharedPreferences = getBaseContext().getSharedPreferences("userprefs", MODE_PRIVATE).edit();
+
+                /* simpan data preferensi */
+                sharedPreferences.putString("username", txtUserName.getText().toString());
+                sharedPreferences.putString("email", txtEmail);
+                sharedPreferences.putString("address", txtAddress);
+                sharedPreferences.commit();
+
+                /* lanjutkan ke layout utama */
+                gotoMainLayout();
             }
         });
 
@@ -56,10 +66,21 @@ public class AuthActivity extends AppCompatActivity {
             }
         });
 
-        /* jalankan fungsi random user untuk pertama kali */
-        getRandomUser();
+        /* saat aplikasi di load, cek apakah sudah pernah login */
+        /* jika sudah pernah login, maka lanjutkan ke layout utama */
+        SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences("userprefs", MODE_PRIVATE);
+        String login_status = sharedPreferences.getString("username", null);
+        if(login_status != null) gotoMainLayout(); else getRandomUser();
     }
 
+    /* lanjutkan ke layout utama */
+    private void gotoMainLayout() {
+        Intent intent = new Intent(AuthActivity.this, Weather.class);
+        startActivity(intent);
+        finish();
+    }
+
+    /* buat fungsi untuk mendapatkan data user baru */
     private void getRandomUser() {
 
         /* deklarasi penggunaan volley */
@@ -88,6 +109,7 @@ public class AuthActivity extends AppCompatActivity {
                         JSONObject name = (JSONObject) item.get("name");
                         JSONObject login = (JSONObject) item.get("login");
                         JSONObject picture = (JSONObject) item.get("picture");
+                        JSONObject location = (JSONObject) item.get("location");
 
                         /* tampilkan data gender dengan toast */
                         // Toast.makeText(AuthActivity.this, name.get("gender").toString(), Toast.LENGTH_SHORT).show();
@@ -101,6 +123,9 @@ public class AuthActivity extends AppCompatActivity {
                         Bitmap bitmap = BitmapFactory.decodeResource(AuthActivity.this.getResources(), R.drawable.weather_icon);
                         Bitmap circularBitmap = ImageConverter.getRoundedCornerBitmap(bitmap, 100);
                         imgUserAvatar.setImageResource(circularBitmap.getGenerationId());
+
+                        txtEmail = item.get("email").toString();
+                        txtAddress = location.get("street") + ", " + location.get("city");
 
                     } catch (JSONException e) {
                         e.printStackTrace();
