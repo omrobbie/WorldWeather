@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -74,5 +75,9 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
     /* implementasikan onItemClick dari WeatherAdapter */
     @Override
     public void onItemClick(View view, int position) {
+        HashMap<String, String> item = adapter.getData(position);
+
+        /* tampilkan nama negara yang di klik dengan toast */
+        Toast.makeText(this, item.get("name"), Toast.LENGTH_SHORT).show();
     }
 }

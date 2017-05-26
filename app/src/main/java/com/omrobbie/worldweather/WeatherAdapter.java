@@ -162,4 +162,10 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
     public void setItemClickListener(ItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
     }
+
+    /* deklarasi getter event untuk data array (bikin manual, tanpa autocomplete) */
+    public HashMap<String, String> getData(int id) {
+        HashMap<String, String> item = data.get(id);
+        return item;
+    }
 }
