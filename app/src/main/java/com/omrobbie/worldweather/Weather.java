@@ -27,6 +27,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static android.R.attr.id;
+
 public class Weather extends AppCompatActivity implements WeatherAdapter.ItemClickListener {
 
     private WeatherAdapter adapter;
@@ -131,25 +133,61 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
                                 JSONObject item = (JSONObject) jsonArray.get(i);
 
                                 /* deklarasi variable penyimpanan data item sementara */
-                                String hash_alpha2Code = item.getString("alpha2Code").toString();
+                                /* variable data countries */
+                                String hash_alpha2Code = item.getString("alpha2Code");
                                 String hash_flag = item.getString("flag");
                                 String hash_name = item.getString("name");
                                 String hash_capital = item.getString("capital");
                                 String hash_nativeName = item.getString("nativeName");
 
+                                /* variable data weather */
+                                String hash_icon;
+                                String hash_description;
+                                String hash_temp;
+                                String hash_speed;
+
+                                /* deklarasi penggunaan volley untuk open weather API */
+                                RequestQueue requestQueueWeather = Volley.newRequestQueue(Weather.this);
+                                String urlAPI = "http://api.openweathermap.org/data/2.5/weather?q=" + hash_capital + "," + hash_alpha2Code + "id&appid=c2818357c736d789a6086696fc8d9b30";
+
+                                /* meminta respon berupa string dari urlAPI */
+                                StringRequest stringRequestWeather = new StringRequest(Request.Method.GET, urlAPI,
+                                        new Response.Listener<String>() {
+                                            @Override
+                                            public void onResponse(String response) {
+
+                                            }
+                                        },
+
+                                        new Response.ErrorListener() {
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+                                                Toast.makeText(Weather.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                );
+
+                                /* deklarasi variable penyimpanan data item weather sementara */
+                                hash_icon = "http://openweathermap.org/img/w/" + "09d" + ".png";
+                                hash_description = "light intensity drizzle";
+                                hash_temp = "280.32";
+                                hash_speed = "4.1";
+
                                 /* deklarasi variable penyimpanan array sementara */
                                 HashMap<String, String> tmp = new HashMap<>();
 
+                                /* simpan data countries ke array */
                                 tmp.put("alpha2Code", hash_alpha2Code);
                                 tmp.put("flag", hash_flag);
                                 tmp.put("name", hash_name);
                                 tmp.put("capital", hash_capital);
                                 tmp.put("nativeName", hash_nativeName);
 
-                                tmp.put("icon", "http://openweathermap.org/img/w/" + "09d" + ".png");
-                                tmp.put("description", "light intensity drizzle");
-                                tmp.put("temp", "280.32");
-                                tmp.put("speed", "4.1");
+                                /* simpan data weather ke array */
+                                tmp.put("icon", hash_icon);
+                                tmp.put("description", hash_description);
+                                tmp.put("temp", hash_temp);
+                                tmp.put("speed", hash_speed);
 
                                 /* masukkan ke data array */
                                 data.add(tmp);
