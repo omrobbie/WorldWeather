@@ -126,52 +126,82 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
 
                         /* deklarasi response dari request REST Countries API */
                         try {
-                            JSONArray jsonArray = new JSONArray(response);
+                            final JSONArray jsonArray = new JSONArray(response);
 
                             /* ambil keseluruhan data dari response */
                             for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject item = (JSONObject) jsonArray.get(i);
+                                final JSONObject itemCountries = (JSONObject) jsonArray.get(i);
 
                                 /* deklarasi variable penyimpanan data item sementara */
                                 /* variable data countries */
-                                String hash_alpha2Code = item.getString("alpha2Code");
-                                String hash_flag = item.getString("flag");
-                                String hash_name = item.getString("name");
-                                String hash_capital = item.getString("capital");
-                                String hash_nativeName = item.getString("nativeName");
+                                String hash_alpha2Code = itemCountries.getString("alpha2Code");
+                                String hash_flag = itemCountries.getString("flag");
+                                String hash_name = itemCountries.getString("name");
+                                String hash_capital = itemCountries.getString("capital");
+                                String hash_nativeName = itemCountries.getString("nativeName");
 
                                 /* variable data weather */
-                                String hash_icon;
-                                String hash_description;
-                                String hash_temp;
-                                String hash_speed;
+                                final String[] hash_icon = new String[1];
+                                final String[] hash_description = new String[1];
+                                final String[] hash_temp = new String[1];
+                                final String[] hash_speed = new String[1];
 
-                                /* deklarasi penggunaan volley untuk open weather API */
-                                RequestQueue requestQueueWeather = Volley.newRequestQueue(Weather.this);
-                                String urlAPI = "http://api.openweathermap.org/data/2.5/weather?q=" + hash_capital + "," + hash_alpha2Code + "id&appid=c2818357c736d789a6086696fc8d9b30";
-
-                                /* meminta respon berupa string dari urlAPI */
-                                StringRequest stringRequestWeather = new StringRequest(Request.Method.GET, urlAPI,
-                                        new Response.Listener<String>() {
-                                            @Override
-                                            public void onResponse(String response) {
-
-                                            }
-                                        },
-
-                                        new Response.ErrorListener() {
-                                            @Override
-                                            public void onErrorResponse(VolleyError error) {
-                                                Toast.makeText(Weather.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                );
+//                                /* deklarasi penggunaan volley untuk open weather API */
+//                                RequestQueue requestQueueWeather = Volley.newRequestQueue(Weather.this);
+//                                String urlAPI = "http://api.openweathermap.org/data/2.5/weather?q=" + hash_capital + "," + hash_alpha2Code + "id&appid=c2818357c736d789a6086696fc8d9b30";
+//
+//                                /* meminta respon berupa string dari urlAPI */
+//                                StringRequest stringRequestWeather = new StringRequest(Request.Method.GET, urlAPI,
+//                                        new Response.Listener<String>() {
+//                                            @Override
+//                                            public void onResponse(String response) {
+//                                                try {
+//
+//                                                    /* deklarasi response dari request REST Weather API */
+//                                                    JSONObject jsonObject = new JSONObject(response);
+//
+//                                                    /* ambil data dari objek weather */
+//                                                    JSONArray itemWeather = (JSONArray) jsonObject.get("weather");
+//                                                    JSONObject dataWeather = (JSONObject) itemWeather.get(0);
+//
+//                                                    /* simpan data ke variabel */
+//                                                    hash_icon[0] = dataWeather.getString("icon");
+//                                                    hash_description[0] = dataWeather.getString("description");
+//
+//                                                    /* ambil data dari objek main */
+//                                                    JSONObject dataMain = (JSONObject) jsonObject.get("main");
+//
+//                                                    /* simpan data ke variabel */
+//                                                    hash_temp[0] = dataMain.getString("temp");
+//
+//                                                    /* ambil data dari objek wind */
+//                                                    JSONObject dataWind = (JSONObject) jsonObject.get("wind");
+//
+//                                                    /* simpan data ke variabel */
+//                                                    hash_speed[0] = dataWind.getString("speed");
+//
+//                                                } catch (JSONException e) {
+//                                                    e.printStackTrace();
+//                                                }
+//                                            }
+//                                        },
+//
+//                                        new Response.ErrorListener() {
+//                                            @Override
+//                                            public void onErrorResponse(VolleyError error) {
+//                                                Toast.makeText(Weather.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+//                                            }
+//                                        }
+//                                );
+//
+//                                /* masukkan data request kedalam request queue */
+//                                requestQueueWeather.add(stringRequestWeather);
 
                                 /* deklarasi variable penyimpanan data item weather sementara */
-                                hash_icon = "http://openweathermap.org/img/w/" + "09d" + ".png";
-                                hash_description = "light intensity drizzle";
-                                hash_temp = "280.32";
-                                hash_speed = "4.1";
+                                hash_icon[0] = "http://openweathermap.org/img/w/10d.png";
+                                hash_description[0] = "heavy intensity shower rain";
+                                hash_temp[0] = "121.23";
+                                hash_speed[0] = "41.1";
 
                                 /* deklarasi variable penyimpanan array sementara */
                                 HashMap<String, String> tmp = new HashMap<>();
@@ -184,10 +214,10 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
                                 tmp.put("nativeName", hash_nativeName);
 
                                 /* simpan data weather ke array */
-                                tmp.put("icon", hash_icon);
-                                tmp.put("description", hash_description);
-                                tmp.put("temp", hash_temp);
-                                tmp.put("speed", hash_speed);
+                                tmp.put("icon", hash_icon[0]);
+                                tmp.put("description", hash_description[0]);
+                                tmp.put("temp", hash_temp[0]);
+                                tmp.put("speed", hash_speed[0]);
 
                                 /* masukkan ke data array */
                                 data.add(tmp);
