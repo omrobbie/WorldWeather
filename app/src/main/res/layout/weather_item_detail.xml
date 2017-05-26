@@ -107,19 +107,248 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="5 Days Forecast :"
+                android:textSize="14sp"
+                android:textStyle="bold"/>
+
+            <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="800dp"
-                    android:text="Informasi Cuaca"
-                    android:textSize="14sp"
-                    android:textStyle="bold"/>
-            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtDate1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tanggal"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"/>
+
+                        <ImageView
+                            android:id="@+id/imgWeather1"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="8dp"
+                            android:background="@color/colorAccent"/>
+
+                        <TextView
+                            android:id="@+id/txtTemperature1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Temperatur"
+                            android:textSize="18sp"
+                            android:layout_gravity="center"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_margin="5dp"
+                            android:background="@android:color/darker_gray"/>
+
+                        <TextView
+                            android:id="@+id/txtWeather1"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="light intensity drizzle"
+                            android:layout_gravity="center"
+                            android:gravity="center"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtDate2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tanggal"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"/>
+
+                        <ImageView
+                            android:id="@+id/imgWeather2"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="8dp"
+                            android:background="@color/colorAccent"/>
+
+                        <TextView
+                            android:id="@+id/txtTemperature2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Temperatur"
+                            android:textSize="18sp"
+                            android:layout_gravity="center"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_margin="5dp"
+                            android:background="@android:color/darker_gray"/>
+
+                        <TextView
+                            android:id="@+id/txtWeather2"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="light intensity drizzle"
+                            android:layout_gravity="center"
+                            android:gravity="center"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtDate3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tanggal"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"/>
+
+                        <ImageView
+                            android:id="@+id/imgWeather3"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="8dp"
+                            android:background="@color/colorAccent"/>
+
+                        <TextView
+                            android:id="@+id/txtTemperature3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Temperatur"
+                            android:textSize="18sp"
+                            android:layout_gravity="center"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_margin="5dp"
+                            android:background="@android:color/darker_gray"/>
+
+                        <TextView
+                            android:id="@+id/txtWeather3"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="light intensity drizzle"
+                            android:layout_gravity="center"
+                            android:gravity="center"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtDate4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tanggal"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"/>
+
+                        <ImageView
+                            android:id="@+id/imgWeather4"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="8dp"
+                            android:background="@color/colorAccent"/>
+
+                        <TextView
+                            android:id="@+id/txtTemperature4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Temperatur"
+                            android:textSize="18sp"
+                            android:layout_gravity="center"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_margin="5dp"
+                            android:background="@android:color/darker_gray"/>
+
+                        <TextView
+                            android:id="@+id/txtWeather4"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="light intensity drizzle"
+                            android:layout_gravity="center"
+                            android:gravity="center"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txtDate5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tanggal"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"/>
+
+                        <ImageView
+                            android:id="@+id/imgWeather5"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_margin="8dp"
+                            android:background="@color/colorAccent"/>
+
+                        <TextView
+                            android:id="@+id/txtTemperature5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Temperatur"
+                            android:textSize="18sp"
+                            android:layout_gravity="center"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_margin="5dp"
+                            android:background="@android:color/darker_gray"/>
+
+                        <TextView
+                            android:id="@+id/txtWeather5"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="light intensity drizzle"
+                            android:layout_gravity="center"
+                            android:gravity="center"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </HorizontalScrollView>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
