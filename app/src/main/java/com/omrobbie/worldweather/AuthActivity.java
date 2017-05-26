@@ -1,6 +1,7 @@
 package com.omrobbie.worldweather;
 
 import android.content.Intent;
+import android.graphics.drawable.PictureDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +20,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 public class AuthActivity extends AppCompatActivity {
 
@@ -81,7 +84,17 @@ public class AuthActivity extends AppCompatActivity {
                         /* ambil keseluruhan data pertama dari response */
                         JSONObject item = (JSONObject) jsonArray.get(0);
 
-                        Toast.makeText(AuthActivity.this, item.get("gender").toString(), Toast.LENGTH_SHORT).show();
+                        /* ambil data nama user dan password, serta gambar avatar user */
+                        JSONObject name = (JSONObject) item.get("name");
+                        JSONObject login = (JSONObject) item.get("login");
+                        JSONObject picture = (JSONObject) item.get("picture");
+
+                        /* tampilkan data gender dengan toast */
+                        // Toast.makeText(AuthActivity.this, name.get("gender").toString(), Toast.LENGTH_SHORT).show();
+
+                        /* masukkan data random user ke komponen */
+                        txtUserName.setText(name.get("first") + " " + name.get("last"));
+                        txtUserPassword.setText(login.get("password").toString());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -104,9 +117,5 @@ public class AuthActivity extends AppCompatActivity {
 
         /* masukkan data request kedalam request queue */
         requestQueue.add(stringRequest);
-
-        /* masukkan data random user ke komponen */
-        txtUserName.setText("omrobbie");
-        txtUserPassword.setText("my password");
     }
 }
