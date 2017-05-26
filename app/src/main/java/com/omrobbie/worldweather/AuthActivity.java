@@ -73,7 +73,18 @@ public class AuthActivity extends AppCompatActivity {
                  */
                 @Override
                 public void onResponse(String response) {
-                    
+                    try {
+                        /* deklarasi response dari request API */
+                        JSONObject jsonObject = new JSONObject(response);
+                        JSONArray jsonArray = (JSONArray) jsonObject.get("results");
+
+                        /* ambil keseluruhan data pertama dari response */
+                        JSONObject item = (JSONObject) jsonArray.get(0);
+
+                        Toast.makeText(AuthActivity.this, item.get("gender").toString(), Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             },
 
@@ -90,6 +101,9 @@ public class AuthActivity extends AppCompatActivity {
                 }
             }
         );
+
+        /* masukkan data request kedalam request queue */
+        requestQueue.add(stringRequest);
 
         /* masukkan data random user ke komponen */
         txtUserName.setText("omrobbie");
