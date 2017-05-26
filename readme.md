@@ -10,6 +10,7 @@ Aplikasi ini berfungsi untuk menunjukkan cuaca terkini dari berbagai negara deng
 * [Android Studio](http://developer.android.com/sdk/index.html "Download Android Studio")
 * [Java Development Kit](http://www.oracle.com/technetwork/java/javase/downloads/index.html "Download JDK")
 * [Glide - Image loading framework](https://github.com/bumptech/glide "View Glide options on github")
+* [AndroidSVG](https://bigbadaboom.github.io/androidsvg/ "Check AndroidSVG documentation")
 
 ### Data API :
 * [Random User Generator](https://randomuser.me/api/ "Generate random user")
@@ -18,3 +19,38 @@ Aplikasi ini berfungsi untuk menunjukkan cuaca terkini dari berbagai negara deng
 
 ### Tools :
 * [JSON Formatter](https://jsonformatter.curiousconcept.com/ "Tools untuk memperbaiki format JSON agar mudah dibaca")
+
+---
+
+## Load Gambar SVG :
+API [REST Countries](https://restcountries.eu/rest/v2/all "Generate all countries data") memberikan link berupa gambar bendera dalam vector, sedangkan di android tidak mengenali tipe SVG secara default.
+
+Berikut adalah contoh gambar vector :
+![Negara Kesatuan Republik Indonesia](https://restcountries.eu/data/idn.svg)
+
+Dengan memanfaatkan fungsi dari [AndroidSVG](https://bigbadaboom.github.io/androidsvg/ "Check AndroidSVG documentation") dan [Glide - Image loading framework](https://github.com/bumptech/glide "View Glide options on github"), kita dapat menampilkan gambar vector dengan cara seperti ini :
+
+**Tambahkan perintah ini di gradle dependencies :**
+```java
+    /* panggil androidsvg untuk menampilkan gambar SVG */
+    compile 'com.caverock:androidsvg:1.2.1'
+
+    /* panggil glide untuk menampilkan gambar di ImageView dari hyperlink */
+    compile 'com.github.bumptech.glide:glide:4.0.0-RC0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC0'
+```
+
+**Tambahkan kode ini di constructor adapter :**
+```java
+    private RequestBuilder<PictureDrawable> requestBuilder;
+
+    requestBuilder = GlideApp.with(context)
+        .as(PictureDrawable.class)
+        .placeholder(R.drawable.image_loading)
+        .error(R.drawable.image_error)
+        .transition(withCrossFade())
+        .listener(new SvgSoftwareLayerSetter());
+
+    Uri uri = Uri.parse("https://restcountries.eu/data/idn.svg");
+    requestBuilder.load(uri).into(imgFlag);
+```
