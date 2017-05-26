@@ -8,6 +8,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+
 public class AuthActivity extends AppCompatActivity {
 
     @Override
@@ -29,5 +32,14 @@ public class AuthActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void getRandomUser() {
+
+        /* deklarasi penggunaan volley */
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        String urlAPI = "https://randomuser.me/api/";
+
+        /* meminta respon berupa string dari urlAPI */
     }
 }
