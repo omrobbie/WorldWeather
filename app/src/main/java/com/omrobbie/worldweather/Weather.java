@@ -1,5 +1,6 @@
 package com.omrobbie.worldweather;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -78,6 +79,10 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
         HashMap<String, String> item = adapter.getData(position);
 
         /* tampilkan nama negara yang di klik dengan toast */
-        Toast.makeText(this, item.get("name"), Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, item.get("name"), Toast.LENGTH_SHORT).show();
+
+        /* pindahkan tampilan ke layout item detail */
+        Intent intent = new Intent(this, WeatherIntent.class);
+        startActivity(intent);
     }
 }
