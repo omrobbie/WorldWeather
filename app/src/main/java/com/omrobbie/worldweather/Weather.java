@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -26,13 +27,14 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
         setContentView(R.layout.weather_list);
 
         /* deklarasikan komponen untuk user */
+        LinearLayout headerView = (LinearLayout) findViewById(R.id.headerView);
         ImageView imgUserAvatar = (ImageView) findViewById(R.id.imgUserAvatar);
         TextView txtUserName = (TextView) findViewById(R.id.txtUserName);
         TextView txtEmail = (TextView) findViewById(R.id.txtEmail);
         TextView txtAddress = (TextView) findViewById(R.id.txtAddress);
 
         /* panggil data user dari shared preferences */
-        SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences("userprefs", MODE_PRIVATE);
+        final SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences("userprefs", MODE_PRIVATE);
         txtUserName.setText(sharedPreferences.getString("username", ""));
         txtEmail.setText(sharedPreferences.getString("email", ""));
         txtAddress.setText(sharedPreferences.getString("address", ""));
@@ -88,6 +90,20 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
         RecyclerView weatherList = (RecyclerView) findViewById(R.id.WeatherList);
         weatherList.setLayoutManager(new LinearLayoutManager(this));
         weatherList.setAdapter(adapter);
+
+        /* jika header user di klik, hapus shared preferences dan kembali ke layout login */
+        headerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /* kosongkan isi shared preferences */
+                sharedPreferences.edit().clear().commit();
+
+                /* kembali ke layout login */
+                Intent intent = new Intent(Weather.this, AuthActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     /* implementasikan onItemClick dari WeatherAdapter */
