@@ -118,7 +118,7 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
     }
 
     /* setup inner class view untuk inflater listitem layout */
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public ImageView imgFlag;
         public TextView txtCountry;
@@ -136,6 +136,23 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
             imgWeather = (ImageView) itemView.findViewById(R.id.imgWeather);
             txtWeather = (TextView) itemView.findViewById(R.id.txtWeather);
             txtTemperature = (TextView) itemView.findViewById(R.id.txtTemperature);
+
+            /* set listener saat onClick */
+            itemView.setOnClickListener(this);
         }
+
+        /**
+         * Called when a view has been clicked.
+         *
+         * @param v The view that was clicked.
+         */
+        @Override
+        public void onClick(View v) {
+        }
+    }
+
+    /* deklarasi interface untuk clickListener */
+    public interface ItemClickListener {
+        void onItemClick(View view, int position);
     }
 }
