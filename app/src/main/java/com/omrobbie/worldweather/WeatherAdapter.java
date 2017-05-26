@@ -102,8 +102,9 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
 
         /* masukkan data ke semua komponen */
         requestBuilder.load(Uri.parse(item.get("flag"))).into(holder.imgFlag);
-        holder.txtCountry.setText(item.get("name") + " (" + item.get("capital") + ")");
+        holder.txtCountry.setText(item.get("name") + " (" + item.get("alpha2Code") + ")");
         Glide.with(context).load(item.get("icon")).into(holder.imgWeather);
+        holder.txtCapital.setText(item.get("capital"));
         holder.txtWeather.setText(item.get("description"));
         holder.txtTemperature.setText("Temp: " + item.get("temp") + " | Wind: " + item.get("speed"));
     }
@@ -124,6 +125,7 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
         public ImageView imgFlag;
         public TextView txtCountry;
         public ImageView imgWeather;
+        public TextView txtCapital;
         public TextView txtWeather;
         public TextView txtTemperature;
 
@@ -135,6 +137,7 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
             imgFlag = (ImageView) itemView.findViewById(R.id.imgFlag);
             txtCountry = (TextView) itemView.findViewById(R.id.txtCountry);
             imgWeather = (ImageView) itemView.findViewById(R.id.imgWeather);
+            txtCapital = (TextView) itemView.findViewById(R.id.txtCapital);
             txtWeather = (TextView) itemView.findViewById(R.id.txtWeather);
             txtTemperature = (TextView) itemView.findViewById(R.id.txtTemperature);
 
