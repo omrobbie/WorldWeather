@@ -35,6 +35,7 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
         tmp.put("flag", "https://restcountries.eu/data/idn.svg");
         tmp.put("name", "Indonesia");
         tmp.put("capital", "Jakarta");
+        tmp.put("nativeName", "Bahasa Indonesia");
 
         /* API Source: http://openweathermap.org/api */
         tmp.put("icon", "http://openweathermap.org/img/w/" + "09d" + ".png");
@@ -51,6 +52,7 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
         tmp.put("flag", "https://restcountries.eu/data/usa.svg");
         tmp.put("name", "United States of America");
         tmp.put("capital", "Washington, D.C.");
+        tmp.put("nativeName", "English");
 
         /* API Source: http://openweathermap.org/api */
         tmp.put("icon", "http://openweathermap.org/img/w/" + "04n" + ".png");
@@ -89,6 +91,7 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
         intent.putExtra("flag", item.get("flag"));
         intent.putExtra("name", item.get("name"));
         intent.putExtra("capital", item.get("capital"));
+        intent.putExtra("nativeName", item.get("nativeName"));
         intent.putExtra("icon", item.get("icon"));
         intent.putExtra("description", item.get("description"));
         intent.putExtra("temp", item.get("temp"));
