@@ -1,17 +1,19 @@
 package com.omrobbie.worldweather;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import static android.R.attr.y;
 
 public class Weather extends AppCompatActivity implements WeatherAdapter.ItemClickListener {
 
@@ -22,6 +24,19 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.weather_list);
+
+        /* deklarasikan komponen untuk user */
+        ImageView imgUserAvatar = (ImageView) findViewById(R.id.imgUserAvatar);
+        TextView txtUserName = (TextView) findViewById(R.id.txtUserName);
+        TextView txtEmail = (TextView) findViewById(R.id.txtEmail);
+        TextView txtAddress = (TextView) findViewById(R.id.txtAddress);
+
+        /* panggil data user dari shared preferences */
+        SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences("userprefs", MODE_PRIVATE);
+        txtUserName.setText(sharedPreferences.getString("username", ""));
+        txtEmail.setText(sharedPreferences.getString("email", ""));
+        txtAddress.setText(sharedPreferences.getString("address", ""));
+        Glide.with(this).load(sharedPreferences.getString("image", "")).into(imgUserAvatar);
 
         /* deklarasi data array */
         data = new ArrayList<>();

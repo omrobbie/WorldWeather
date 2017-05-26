@@ -28,7 +28,7 @@ public class AuthActivity extends AppCompatActivity {
 
     ImageView imgUserAvatar;
     TextView txtUserName, txtUserPassword;
-    String txtEmail, txtAddress;
+    String txtEmail, txtAddress, txtImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +52,7 @@ public class AuthActivity extends AppCompatActivity {
                 sharedPreferences.putString("username", txtUserName.getText().toString());
                 sharedPreferences.putString("email", txtEmail);
                 sharedPreferences.putString("address", txtAddress);
+                sharedPreferences.putString("image", txtImage);
                 sharedPreferences.commit();
 
                 /* lanjutkan ke layout utama */
@@ -126,6 +127,7 @@ public class AuthActivity extends AppCompatActivity {
 
                         txtEmail = item.get("email").toString();
                         txtAddress = location.get("street") + ", " + location.get("city");
+                        txtImage = picture.get("medium").toString();
 
                     } catch (JSONException e) {
                         e.printStackTrace();
