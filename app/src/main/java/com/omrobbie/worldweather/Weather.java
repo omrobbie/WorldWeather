@@ -83,6 +83,18 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
 
         /* pindahkan tampilan ke layout item detail */
         Intent intent = new Intent(this, WeatherIntent.class);
+
+        /* masukkan data ke intent */
+        intent.putExtra("alpha2Code", item.get("alpha2Code"));
+        intent.putExtra("flag", item.get("flag"));
+        intent.putExtra("name", item.get("name"));
+        intent.putExtra("capital", item.get("capital"));
+        intent.putExtra("icon", item.get("icon"));
+        intent.putExtra("description", item.get("description"));
+        intent.putExtra("temp", item.get("temp"));
+        intent.putExtra("speed", item.get("speed"));
+
+        /* jalankan intent */
         startActivity(intent);
     }
 }
