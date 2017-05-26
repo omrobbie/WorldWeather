@@ -1,7 +1,6 @@
 package com.omrobbie.worldweather;
 
 import android.content.Intent;
-import android.graphics.drawable.PictureDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,12 +15,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 public class AuthActivity extends AppCompatActivity {
 
@@ -95,6 +93,8 @@ public class AuthActivity extends AppCompatActivity {
                         /* masukkan data random user ke komponen */
                         txtUserName.setText(name.get("first") + " " + name.get("last"));
                         txtUserPassword.setText(login.get("password").toString());
+                        Glide.with(AuthActivity.this).load(picture.get("medium")).into(imgUserAvatar);
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
