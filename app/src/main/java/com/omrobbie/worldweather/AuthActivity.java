@@ -13,15 +13,19 @@ import com.android.volley.toolbox.Volley;
 
 public class AuthActivity extends AppCompatActivity {
 
+    ImageView imgUserAvatar;
+    TextView txtUserName;
+    TextView txtUserPassword;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
 
         /* deklarasikan component yang ada di layout activity_auth */
-        ImageView imgUserAvatar = (ImageView) findViewById(R.id.imgUserAvatar);
-        TextView txtUserName = (TextView) findViewById(R.id.txtUserName);
-        TextView txtUserPassword = (TextView) findViewById(R.id.txtUserPassword);
+        imgUserAvatar = (ImageView) findViewById(R.id.imgUserAvatar);
+        txtUserName = (TextView) findViewById(R.id.txtUserName);
+        txtUserPassword = (TextView) findViewById(R.id.txtUserPassword);
         Button btnUserLogin = (Button) findViewById(R.id.btnUserLogin);
         Button btnUserSwitch = (Button) findViewById(R.id.btnUserSwitch);
 
@@ -32,6 +36,16 @@ public class AuthActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btnUserSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getRandomUser();
+            }
+        });
+
+        /* jalankan fungsi random user untuk pertama kali */
+        getRandomUser();
     }
 
     private void getRandomUser() {
@@ -41,5 +55,9 @@ public class AuthActivity extends AppCompatActivity {
         String urlAPI = "https://randomuser.me/api/";
 
         /* meminta respon berupa string dari urlAPI */
+
+        /* masukkan data random user ke komponen */
+        txtUserName.setText("omrobbie");
+        txtUserPassword.setText("my password");
     }
 }
