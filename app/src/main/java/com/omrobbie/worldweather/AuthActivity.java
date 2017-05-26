@@ -116,18 +116,18 @@ public class AuthActivity extends AppCompatActivity {
                         // Toast.makeText(AuthActivity.this, name.get("gender").toString(), Toast.LENGTH_SHORT).show();
 
                         /* masukkan data random user ke komponen */
-                        txtUserName.setText(name.get("first") + " " + name.get("last"));
-                        txtUserPassword.setText(login.get("password").toString());
-                        Glide.with(AuthActivity.this).load(picture.get("medium")).into(imgUserAvatar);
+                        txtUserName.setText(name.getString("first") + " " + name.getString("last"));
+                        txtUserPassword.setText(login.getString("password"));
+                        Glide.with(AuthActivity.this).load(picture.getString("medium")).into(imgUserAvatar);
 
                         /* bikin gambar pada ImageView menjadi bulat */
                         Bitmap bitmap = BitmapFactory.decodeResource(AuthActivity.this.getResources(), R.drawable.weather_icon);
                         Bitmap circularBitmap = ImageConverter.getRoundedCornerBitmap(bitmap, 100);
                         imgUserAvatar.setImageResource(circularBitmap.getGenerationId());
 
-                        txtEmail = item.get("email").toString();
-                        txtAddress = location.get("street") + ", " + location.get("city");
-                        txtImage = picture.get("medium").toString();
+                        txtEmail = item.getString("email");
+                        txtAddress = location.getString("street") + ", " + location.getString("city");
+                        txtImage = picture.getString("medium");
 
                     } catch (JSONException e) {
                         e.printStackTrace();
