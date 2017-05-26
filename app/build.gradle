@@ -37,4 +37,7 @@ dependencies {
 
     /* panggil androidsvg untuk menampilkan gambar SVG */
     compile 'com.caverock:androidsvg:1.2.1'
+
+    /* panggil volley untuk membaca data REST API JSON */
+    compile 'com.android.volley:volley:1.0.0'
 }
