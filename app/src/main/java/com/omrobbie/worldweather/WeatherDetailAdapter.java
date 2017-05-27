@@ -90,7 +90,7 @@ public class WeatherDetailAdapter extends RecyclerView.Adapter<WeatherDetailAdap
         /* masukkan data ke semua komponen */
         Glide.with(context).load(item.get("icon")).into(holder.imgWeather);
         holder.txtDate.setText(item.get("dt_txt"));
-        holder.txtTemperature.setText("Temp: " + item.get("temp") + " | Humidity : " + item.get("humidity") + "| Wind: " + item.get("speed"));
+        holder.txtTemperature.setText("Temp: " + item.get("temp") + " | Humidity : " + item.get("humidity") + " | Wind: " + item.get("speed"));
         holder.txtWeather.setText(item.get("main") + ", " + item.get("description"));
     }
 
