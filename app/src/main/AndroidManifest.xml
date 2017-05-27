@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Weather" />
-        <activity android:name=".WeatherIntent"></activity>
+        <activity android:name=".WeatherDetail" />
     </application>
 
 </manifest>

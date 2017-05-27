@@ -52,7 +52,50 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
         Glide.with(this).load(sharedPreferences.getString("image", "")).into(imgUserAvatar);
 
         /* panggil fungsi untuk mengambil data API */
-        getJSONData();
+//        getJSONData();
+
+        /* setup dummy data --------------------------------------------------------------------- */
+
+        /* kosongkan isi data array */
+        data = new ArrayList<>();
+
+        /* deklarasi variable penyimpanan array sementara */
+        HashMap<String, String> tmp = new HashMap<>();
+
+        /* simpan data countries ke array */
+        tmp.put("alpha2Code", "ID");
+        tmp.put("flag", "https://restcountries.eu/data/idn.svg");
+        tmp.put("name", "Indonesia");
+        tmp.put("capital", "Jakarta");
+        tmp.put("nativeName", "Bahasa Indonesia");
+
+        /* simpan data weather ke array */
+        tmp.put("icon", "http://openweathermap.org/img/w/10d.png");
+        tmp.put("description", "haze");
+        tmp.put("temp", "300.15");
+        tmp.put("speed", "1.5");
+
+        /* masukkan ke data array */
+        data.add(tmp);
+        tmp = new HashMap<>();
+
+        /* simpan data countries ke array */
+        tmp.put("alpha2Code", "US");
+        tmp.put("flag", "https://restcountries.eu/data/usa.svg");
+        tmp.put("name", "United States of America");
+        tmp.put("capital", "Washington, D.C.");
+        tmp.put("nativeName", "English");
+
+        /* simpan data weather ke array */
+        tmp.put("icon", "http://openweathermap.org/img/w/01d.png");
+        tmp.put("description", "haze");
+        tmp.put("temp", "300.15");
+        tmp.put("speed", "1.5");
+
+        /* masukkan ke data array */
+        data.add(tmp);
+
+        /* setup dummy data --------------------------------------------------------------------- */
 
         /* setup adapter */
         adapter = new WeatherAdapter(this, data);
@@ -89,7 +132,7 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
         // Toast.makeText(this, item.get("name"), Toast.LENGTH_SHORT).show();
 
         /* pindahkan tampilan ke layout item detail */
-        Intent intent = new Intent(this, WeatherIntent.class);
+        Intent intent = new Intent(this, WeatherDetail.class);
 
         /* masukkan data ke intent */
         intent.putExtra("alpha2Code", item.get("alpha2Code"));

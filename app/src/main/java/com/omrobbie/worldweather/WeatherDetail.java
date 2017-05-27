@@ -7,19 +7,16 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
-
-import org.w3c.dom.Text;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
-public class WeatherIntent extends AppCompatActivity {
+public class WeatherDetail extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.weather_item_detail);
+        setContentView(R.layout.weather_detail);
 
         /* setup Glide agar bisa membaca format SVG */
         RequestBuilder<PictureDrawable> requestBuilder = GlideApp.with(this)
@@ -35,10 +32,6 @@ public class WeatherIntent extends AppCompatActivity {
         String int_name = getIntent().getStringExtra("name");
         String int_capital = getIntent().getStringExtra("capital");
         String int_nativeName = getIntent().getStringExtra("nativeName");
-        String int_icon = getIntent().getStringExtra("icon");
-        String int_description = getIntent().getStringExtra("description");
-        String int_temp = getIntent().getStringExtra("temp");
-        String int_speed = getIntent().getStringExtra("speed");
 
         /* deklarasikan semua komponen yang dipakai di dalam layout */
         ImageView imgFlag = (ImageView) findViewById(R.id.imgFlag);
