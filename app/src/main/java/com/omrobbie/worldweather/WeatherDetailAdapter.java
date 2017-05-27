@@ -21,7 +21,6 @@ public class WeatherDetailAdapter extends RecyclerView.Adapter<WeatherDetailAdap
     private ArrayList<HashMap<String, String>> data = new ArrayList<>();
     private LayoutInflater inflater;
     private Context context;
-    private ItemClickListener itemClickListener;
 
     /* setup constructor untuk class WeatherAdapter */
     public WeatherDetailAdapter(Context context, ArrayList<HashMap<String, String>> data) {
@@ -52,7 +51,7 @@ public class WeatherDetailAdapter extends RecyclerView.Adapter<WeatherDetailAdap
      */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.weather_listitems, parent, false);
+        View view = inflater.inflate(R.layout.weather_detailitems, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
@@ -90,7 +89,7 @@ public class WeatherDetailAdapter extends RecyclerView.Adapter<WeatherDetailAdap
 
         /* masukkan data ke semua komponen */
         Glide.with(context).load(item.get("icon")).into(holder.imgWeather);
-        holder.txtDate.setText(item.get("date"));
+        holder.txtDate.setText(item.get("dt_txt"));
         holder.txtTemperature.setText("Temp: " + item.get("temp") + " | Humidity : " + item.get("humidity") + "| Wind: " + item.get("speed"));
         holder.txtWeather.setText(item.get("main") + ", " + item.get("description"));
     }
@@ -106,7 +105,7 @@ public class WeatherDetailAdapter extends RecyclerView.Adapter<WeatherDetailAdap
     }
 
     /* setup inner class view untuk inflater listitem layout */
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView imgWeather;
         public TextView txtDate;
@@ -122,35 +121,6 @@ public class WeatherDetailAdapter extends RecyclerView.Adapter<WeatherDetailAdap
             txtDate = (TextView) itemView.findViewById(R.id.txtDate);
             txtTemperature = (TextView) itemView.findViewById(R.id.txtTemperature);
             txtWeather = (TextView) itemView.findViewById(R.id.txtWeather);
-
-            /* set listener saat onClick */
-            itemView.setOnClickListener(this);
         }
-
-        /**
-         * Called when a view has been clicked.
-         *
-         * @param v The view that was clicked.
-         */
-        @Override
-        public void onClick(View v) {
-            if(itemClickListener != null) itemClickListener.onItemClick(v, getAdapterPosition());
-        }
-    }
-
-    /* deklarasi interface untuk clickListener */
-    public interface ItemClickListener {
-        void onItemClick(View view, int position);
-    }
-
-    /* deklarasi setter event saat di klik*/
-    public void setItemClickListener(ItemClickListener itemClickListener) {
-        this.itemClickListener = itemClickListener;
-    }
-
-    /* deklarasi getter event untuk data array (bikin manual, tanpa autocomplete) */
-    public HashMap<String, String> getData(int id) {
-        HashMap<String, String> item = data.get(id);
-        return item;
     }
 }
