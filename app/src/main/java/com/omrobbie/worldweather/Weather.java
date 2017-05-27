@@ -27,8 +27,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static android.R.attr.id;
-
 public class Weather extends AppCompatActivity implements WeatherAdapter.ItemClickListener {
 
     private WeatherAdapter adapter;
@@ -132,13 +130,17 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 final JSONObject itemCountries = (JSONObject) jsonArray.get(i);
 
+                                /* ambil data dari objek languages */
+                                JSONArray dataLanguages = (JSONArray) itemCountries.get("languages");
+                                JSONObject dataLanguagesItem = (JSONObject) dataLanguages.get(0);
+
                                 /* deklarasi variable penyimpanan data item sementara */
                                 /* variable data countries */
                                 String hash_alpha2Code = itemCountries.getString("alpha2Code");
                                 String hash_flag = itemCountries.getString("flag");
                                 String hash_name = itemCountries.getString("name");
                                 String hash_capital = itemCountries.getString("capital");
-                                String hash_nativeName = itemCountries.getString("nativeName");
+                                String hash_nativeName = dataLanguagesItem.getString("nativeName");
 
                                 /* variable data weather */
                                 final String[] hash_icon = new String[1];
@@ -148,7 +150,7 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
 
 //                                /* deklarasi penggunaan volley untuk open weather API */
 //                                RequestQueue requestQueueWeather = Volley.newRequestQueue(Weather.this);
-//                                String urlAPI = "http://api.openweathermap.org/data/2.5/weather?q=" + hash_capital + "," + hash_alpha2Code + "id&appid=c2818357c736d789a6086696fc8d9b30";
+//                                String urlAPI = "http://api.openweathermap.org/data/2.5/weather?q=" + hash_capital + "," + hash_alpha2Code + "&appid=c2818357c736d789a6086696fc8d9b30";
 //
 //                                /* meminta respon berupa string dari urlAPI */
 //                                StringRequest stringRequestWeather = new StringRequest(Request.Method.GET, urlAPI,
