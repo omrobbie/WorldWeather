@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.NumberPicker;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +26,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -31,6 +34,9 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
 
     private WeatherAdapter adapter;
     private ArrayList<HashMap<String, String>> data;
+
+    /* deklarasikan progress bar */
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +49,9 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
         TextView txtUserName = (TextView) findViewById(R.id.txtUserName);
         TextView txtEmail = (TextView) findViewById(R.id.txtEmail);
         TextView txtAddress = (TextView) findViewById(R.id.txtAddress);
+
+        /* deklarasi progress bar */
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         /* panggil data user dari shared preferences */
         final SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences("userprefs", MODE_PRIVATE);
@@ -83,10 +92,6 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
         intent.putExtra("name", item.get("name"));
         intent.putExtra("capital", item.get("capital"));
         intent.putExtra("nativeName", item.get("nativeName"));
-        intent.putExtra("icon", item.get("icon"));
-        intent.putExtra("description", item.get("description"));
-        intent.putExtra("temp", item.get("temp"));
-        intent.putExtra("speed", item.get("speed"));
 
         /* jalankan intent */
         startActivity(intent);
@@ -94,6 +99,9 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
 
     /* buat fungsi untuk mendapatkan data JSON dari link API */
     private void getJSONData() {
+
+        /* tampilkan progress bar */
+        progressBar.setVisibility(View.VISIBLE);
 
         /* kosongkan isi data array */
         data = new ArrayList<>();
@@ -125,71 +133,9 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
                                 String hash_alpha2Code = itemCountries.getString("alpha2Code");
                                 String hash_flag = itemCountries.getString("flag");
                                 String hash_name = itemCountries.getString("name");
+                                String hash_population = NumberFormat.getInstance().format(itemCountries.get("population"));
                                 String hash_capital = itemCountries.getString("capital");
                                 String hash_nativeName = dataLanguagesItem.getString("nativeName");
-
-                                /* variable data weather */
-                                final String[] hash_icon = new String[1];
-                                final String[] hash_description = new String[1];
-                                final String[] hash_temp = new String[1];
-                                final String[] hash_speed = new String[1];
-
-//                                /* deklarasi penggunaan volley untuk open weather API */
-//                                RequestQueue requestQueueWeather = Volley.newRequestQueue(Weather.this);
-//                                String urlAPI = "http://api.openweathermap.org/data/2.5/weather?q=" + hash_capital + "," + hash_alpha2Code + "&appid=c2818357c736d789a6086696fc8d9b30/";
-//
-//                                /* meminta respon berupa string dari urlAPI */
-//                                StringRequest stringRequestWeather = new StringRequest(Request.Method.GET, urlAPI,
-//                                        new Response.Listener<String>() {
-//                                            @Override
-//                                            public void onResponse(String response) {
-//                                                try {
-//
-//                                                    /* deklarasi response dari request REST Weather API */
-//                                                    JSONObject jsonObject = new JSONObject(response);
-//
-//                                                    /* ambil data dari objek weather */
-//                                                    JSONArray itemWeather = (JSONArray) jsonObject.get("weather");
-//                                                    JSONObject dataWeather = (JSONObject) itemWeather.get(0);
-//
-//                                                    /* simpan data ke variabel */
-//                                                    hash_icon[0] = dataWeather.getString("icon");
-//                                                    hash_description[0] = dataWeather.getString("description");
-//
-//                                                    /* ambil data dari objek main */
-//                                                    JSONObject dataMain = (JSONObject) jsonObject.get("main");
-//
-//                                                    /* simpan data ke variabel */
-//                                                    hash_temp[0] = dataMain.getString("temp");
-//
-//                                                    /* ambil data dari objek wind */
-//                                                    JSONObject dataWind = (JSONObject) jsonObject.get("wind");
-//
-//                                                    /* simpan data ke variabel */
-//                                                    hash_speed[0] = dataWind.getString("speed");
-//
-//                                                } catch (JSONException e) {
-//                                                    e.printStackTrace();
-//                                                }
-//                                            }
-//                                        },
-//
-//                                        new Response.ErrorListener() {
-//                                            @Override
-//                                            public void onErrorResponse(VolleyError error) {
-//                                                Toast.makeText(Weather.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-//                                            }
-//                                        }
-//                                );
-//
-//                                /* masukkan data request kedalam request queue */
-//                                requestQueueWeather.add(stringRequestWeather);
-
-                                /* deklarasi variable penyimpanan data item weather sementara */
-                                hash_icon[0] = "http://openweathermap.org/img/w/10d.png";
-                                hash_description[0] = "heavy intensity shower rain";
-                                hash_temp[0] = "121.23";
-                                hash_speed[0] = "41.1";
 
                                 /* deklarasi variable penyimpanan array sementara */
                                 HashMap<String, String> tmp = new HashMap<>();
@@ -198,14 +144,9 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
                                 tmp.put("alpha2Code", hash_alpha2Code);
                                 tmp.put("flag", hash_flag);
                                 tmp.put("name", hash_name);
+                                tmp.put("population", hash_population);
                                 tmp.put("capital", hash_capital);
                                 tmp.put("nativeName", hash_nativeName);
-
-                                /* simpan data weather ke array */
-                                tmp.put("icon", hash_icon[0]);
-                                tmp.put("description", hash_description[0]);
-                                tmp.put("temp", hash_temp[0]);
-                                tmp.put("speed", hash_speed[0]);
 
                                 /* masukkan ke data array */
                                 data.add(tmp);
@@ -238,5 +179,8 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
 
         /* masukkan data request kedalam request queue */
         requestQueueCountries.add(stringRequestCountries);
+
+        /* sembunyikan progress bar */
+        progressBar.setVisibility(View.GONE);
     }
 }

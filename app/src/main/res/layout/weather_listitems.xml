@@ -3,9 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingTop="8dp"
-    android:paddingLeft="8dp"
-    android:paddingRight="8dp">
+    android:padding="8dp">
 
     <ImageView
         android:id="@+id/imgFlag"
@@ -33,36 +31,16 @@
             android:layout_marginTop="4dp"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/imgWeather"
-                android:layout_width="50dp"
-                android:layout_height="50dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:orientation="vertical">
+                android:text="Population : "/>
 
-                <TextView
-                    android:id="@+id/txtCapital"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Nama Ibu Kota"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/txtTemperature"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Temp: °c | Wind: "/>
-
-                <TextView
-                    android:id="@+id/txtWeather"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Kondisi cuaca"/>
-            </LinearLayout>
+            <TextView
+                android:id="@+id/txtPopulation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1.000.000"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
