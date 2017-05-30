@@ -38,7 +38,7 @@ public class WeatherDetail extends AppCompatActivity {
         setContentView(R.layout.weather_detail);
 
         /* setup Glide agar bisa membaca format SVG */
-        RequestBuilder<PictureDrawable> requestBuilder = GlideApp.with(this)
+        RequestBuilder<PictureDrawable> requestBuilder = GlideApp.with(WeatherDetail.this)
                 .as(PictureDrawable.class)
                 .placeholder(R.drawable.image_loading)
                 .error(R.drawable.image_error)
@@ -68,11 +68,11 @@ public class WeatherDetail extends AppCompatActivity {
         getJSONData();
 
         /* setup adapter */
-        adapter = new WeatherDetailAdapter(this, data);
+        adapter = new WeatherDetailAdapter(WeatherDetail.this, data);
 
         /* masukkan data ke adapter */
         RecyclerView weatherList = (RecyclerView) findViewById(R.id.WeatherList);
-        weatherList.setLayoutManager(new LinearLayoutManager(this));
+        weatherList.setLayoutManager(new LinearLayoutManager(WeatherDetail.this));
         weatherList.setAdapter(adapter);
     }
 
@@ -83,7 +83,7 @@ public class WeatherDetail extends AppCompatActivity {
         data = new ArrayList<>();
 
         /* deklarasi penggunaan volley untuk REST Weather API */
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        RequestQueue requestQueue = Volley.newRequestQueue(WeatherDetail.this);
         String urlAPI = "http://api.openweathermap.org/data/2.5/forecast?q=" + getIntent().getStringExtra("capital") + ","+ getIntent().getStringExtra("alpha2Code") +"&appid=c2818357c736d789a6086696fc8d9b30";
 
         /* meminta respon berupa string dari urlAPI */

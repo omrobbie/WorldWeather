@@ -49,7 +49,7 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
         txtUserName.setText(sharedPreferences.getString("username", ""));
         txtEmail.setText(sharedPreferences.getString("email", ""));
         txtAddress.setText(sharedPreferences.getString("address", ""));
-        Glide.with(this).load(sharedPreferences.getString("image", "")).into(imgUserAvatar);
+        Glide.with(Weather.this).load(sharedPreferences.getString("image", "")).into(imgUserAvatar);
 
         /* panggil fungsi untuk mengambil data API */
         getJSONData();
@@ -98,14 +98,14 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
 ------------------------------------------------------------------------------------------------- */
 
         /* setup adapter */
-        adapter = new WeatherAdapter(this, data);
+        adapter = new WeatherAdapter(Weather.this, data);
 
         /* setup item click listener */
-        adapter.setItemClickListener(this);
+        adapter.setItemClickListener(Weather.this);
 
         /* masukkan data ke adapter */
         RecyclerView weatherList = (RecyclerView) findViewById(R.id.WeatherList);
-        weatherList.setLayoutManager(new LinearLayoutManager(this));
+        weatherList.setLayoutManager(new LinearLayoutManager(Weather.this));
         weatherList.setAdapter(adapter);
 
         /* jika header user di klik, hapus shared preferences dan kembali ke layout login */
@@ -132,7 +132,7 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
         // Toast.makeText(this, item.get("name"), Toast.LENGTH_SHORT).show();
 
         /* pindahkan tampilan ke layout item detail */
-        Intent intent = new Intent(this, WeatherDetail.class);
+        Intent intent = new Intent(Weather.this, WeatherDetail.class);
 
         /* masukkan data ke intent */
         intent.putExtra("alpha2Code", item.get("alpha2Code"));
@@ -156,7 +156,7 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
         data = new ArrayList<>();
 
         /* deklarasi penggunaan volley untuk REST Countries API */
-        RequestQueue requestQueueCountries = Volley.newRequestQueue(this);
+        RequestQueue requestQueueCountries = Volley.newRequestQueue(Weather.this);
         String urlAPI = "https://restcountries.eu/rest/v2/all";
 
         /* meminta respon berupa string dari urlAPI */

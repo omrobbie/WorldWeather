@@ -85,7 +85,7 @@ public class AuthActivity extends AppCompatActivity {
     private void getRandomUser() {
 
         /* deklarasi penggunaan volley */
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        RequestQueue requestQueue = Volley.newRequestQueue(AuthActivity.this);
         String urlAPI = "https://randomuser.me/api/";
 
         /* meminta respon berupa string dari urlAPI */

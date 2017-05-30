@@ -24,9 +24,9 @@ public class WeatherDetailAdapter extends RecyclerView.Adapter<WeatherDetailAdap
 
     /* setup constructor untuk class WeatherAdapter */
     public WeatherDetailAdapter(Context context, ArrayList<HashMap<String, String>> data) {
-        this.inflater = LayoutInflater.from(context);
-        this.data = data;
-        this.context = context;
+        WeatherDetailAdapter.this.inflater = LayoutInflater.from(context);
+        WeatherDetailAdapter.this.data = data;
+        WeatherDetailAdapter.this.context = context;
     }
 
     /**

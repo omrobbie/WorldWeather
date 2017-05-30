@@ -29,9 +29,9 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
 
     /* setup constructor untuk class WeatherAdapter */
     public WeatherAdapter(Context context, ArrayList<HashMap<String, String>> data) {
-        this.inflater = LayoutInflater.from(context);
-        this.data = data;
-        this.context = context;
+        WeatherAdapter.this.inflater = LayoutInflater.from(context);
+        WeatherAdapter.this.data = data;
+        WeatherAdapter.this.context = context;
 
         /* setup Glide agar bisa membaca format SVG */
         requestBuilder = GlideApp.with(context)
@@ -163,7 +163,7 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
 
     /* deklarasi setter event saat di klik*/
     public void setItemClickListener(ItemClickListener itemClickListener) {
-        this.itemClickListener = itemClickListener;
+        WeatherAdapter.this.itemClickListener = itemClickListener;
     }
 
     /* deklarasi getter event untuk data array (bikin manual, tanpa autocomplete) */
