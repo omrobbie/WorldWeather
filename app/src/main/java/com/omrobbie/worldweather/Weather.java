@@ -54,60 +54,6 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
         /* panggil fungsi untuk mengambil data API */
         getJSONData();
 
-/*--------------------------------------------------------------------------------------------------
-
-        // kosongkan isi data array
-        data = new ArrayList<>();
-
-        // deklarasi variable penyimpanan array sementara
-        HashMap<String, String> tmp = new HashMap<>();
-
-        // simpan data countries ke array
-        tmp.put("alpha2Code", "ID");
-        tmp.put("flag", "https://restcountries.eu/data/idn.svg");
-        tmp.put("name", "Indonesia");
-        tmp.put("capital", "Jakarta");
-        tmp.put("nativeName", "Bahasa Indonesia");
-
-        // simpan data weather ke array
-        tmp.put("icon", "http://openweathermap.org/img/w/10d.png");
-        tmp.put("description", "haze");
-        tmp.put("temp", "300.15");
-        tmp.put("speed", "1.5");
-
-        // masukkan ke data array
-        data.add(tmp);
-        tmp = new HashMap<>();
-
-        // simpan data countries ke array
-        tmp.put("alpha2Code", "US");
-        tmp.put("flag", "https://restcountries.eu/data/usa.svg");
-        tmp.put("name", "United States of America");
-        tmp.put("capital", "Washington, D.C.");
-        tmp.put("nativeName", "English");
-
-        // simpan data weather ke array
-        tmp.put("icon", "http://openweathermap.org/img/w/01d.png");
-        tmp.put("description", "haze");
-        tmp.put("temp", "300.15");
-        tmp.put("speed", "1.5");
-
-        // masukkan ke data array
-        data.add(tmp);
-
-------------------------------------------------------------------------------------------------- */
-
-        /* setup adapter */
-        adapter = new WeatherAdapter(Weather.this, data);
-
-        /* setup item click listener */
-        adapter.setItemClickListener(Weather.this);
-
-        /* masukkan data ke adapter */
-        RecyclerView weatherList = (RecyclerView) findViewById(R.id.WeatherList);
-        weatherList.setLayoutManager(new LinearLayoutManager(Weather.this));
-        weatherList.setAdapter(adapter);
-
         /* jika header user di klik, hapus shared preferences dan kembali ke layout login */
         headerView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,9 +73,6 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
     @Override
     public void onItemClick(View view, int position) {
         HashMap<String, String> item = adapter.getData(position);
-
-        /* tampilkan nama negara yang di klik dengan toast */
-        // Toast.makeText(this, item.get("name"), Toast.LENGTH_SHORT).show();
 
         /* pindahkan tampilan ke layout item detail */
         Intent intent = new Intent(Weather.this, WeatherDetail.class);
@@ -157,7 +100,7 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
 
         /* deklarasi penggunaan volley untuk REST Countries API */
         RequestQueue requestQueueCountries = Volley.newRequestQueue(Weather.this);
-        String urlAPI = "https://restcountries.eu/rest/v2/all";
+        String urlAPI = "https://restcountries.eu/rest/v2/all/";
 
         /* meminta respon berupa string dari urlAPI */
         StringRequest stringRequestCountries = new StringRequest(Request.Method.GET, urlAPI,
@@ -193,7 +136,7 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
 
 //                                /* deklarasi penggunaan volley untuk open weather API */
 //                                RequestQueue requestQueueWeather = Volley.newRequestQueue(Weather.this);
-//                                String urlAPI = "http://api.openweathermap.org/data/2.5/weather?q=" + hash_capital + "," + hash_alpha2Code + "&appid=c2818357c736d789a6086696fc8d9b30";
+//                                String urlAPI = "http://api.openweathermap.org/data/2.5/weather?q=" + hash_capital + "," + hash_alpha2Code + "&appid=c2818357c736d789a6086696fc8d9b30/";
 //
 //                                /* meminta respon berupa string dari urlAPI */
 //                                StringRequest stringRequestWeather = new StringRequest(Request.Method.GET, urlAPI,
@@ -270,6 +213,17 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                        } finally {
+                            /* setup adapter */
+                            adapter = new WeatherAdapter(Weather.this, data);
+
+                            /* setup item click listener */
+                            adapter.setItemClickListener(Weather.this);
+
+                            /* masukkan data ke adapter */
+                            RecyclerView weatherList = (RecyclerView) findViewById(R.id.WeatherList);
+                            weatherList.setLayoutManager(new LinearLayoutManager(Weather.this));
+                            weatherList.setAdapter(adapter);
                         }
                     }
                 },

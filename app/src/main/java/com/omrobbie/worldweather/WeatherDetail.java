@@ -29,7 +29,6 @@ import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOption
 
 public class WeatherDetail extends AppCompatActivity {
 
-    WeatherDetailAdapter adapter;
     private ArrayList<HashMap<String, String>> data;
 
     @Override
@@ -66,14 +65,6 @@ public class WeatherDetail extends AppCompatActivity {
 
         /* panggil fungsi untuk mengambil data API */
         getJSONData();
-
-        /* setup adapter */
-        adapter = new WeatherDetailAdapter(WeatherDetail.this, data);
-
-        /* masukkan data ke adapter */
-        RecyclerView weatherList = (RecyclerView) findViewById(R.id.WeatherList);
-        weatherList.setLayoutManager(new LinearLayoutManager(WeatherDetail.this));
-        weatherList.setAdapter(adapter);
     }
 
     /* buat fungsi untuk mendapatkan data JSON dari link API */
@@ -139,6 +130,14 @@ public class WeatherDetail extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                        } finally {
+                            /* setup adapter */
+                            WeatherDetailAdapter adapter = new WeatherDetailAdapter(WeatherDetail.this, data);
+
+                            /* masukkan data ke adapter */
+                            RecyclerView weatherList = (RecyclerView) findViewById(R.id.WeatherList);
+                            weatherList.setLayoutManager(new LinearLayoutManager(WeatherDetail.this));
+                            weatherList.setAdapter(adapter);
                         }
                     }
                 },

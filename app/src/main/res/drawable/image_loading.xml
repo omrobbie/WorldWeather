@@ -1,12 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
-        <bitmap
-            android:src="@android:drawable/sym_def_app_icon"
-            android:gravity="center" />
+    <!-- 10(gap) 10(first) 10(gap) 10(second) 10(gap) 10(third) 10(gap) -->
+    <item
+        android:left="10dp"
+        android:right="50dp">
+        <shape android:shape="oval">
+            <size
+                android:width="10dp"
+                android:height="10dp"/>
+            <solid android:color="@android:color/darker_gray"/>
+        </shape>
     </item>
     <item
-        android:top="20dp"
-        android:bottom="20dp"
-        android:drawable="@drawable/dot_dot_dot"/>
+        android:left="30dp"
+        android:right="30dp">
+        <shape android:shape="oval">
+            <size
+                android:width="10dp"
+                android:height="10dp"/>
+            <solid android:color="@android:color/darker_gray"/>
+        </shape>
+    </item>
+    <item
+        android:left="50dp"
+        android:right="10dp">
+        <shape android:shape="oval">
+            <size
+                android:width="10dp"
+                android:height="10dp"/>
+            <solid android:color="@android:color/darker_gray"/>
+        </shape>
+    </item>
 </layer-list>
