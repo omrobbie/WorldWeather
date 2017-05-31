@@ -182,8 +182,5 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
 
         /* masukkan data request kedalam request queue */
         requestQueueCountries.add(stringRequestCountries);
-
-        /* sembunyikan progress bar */
-        progressBar.setVisibility(View.GONE);
     }
 }
