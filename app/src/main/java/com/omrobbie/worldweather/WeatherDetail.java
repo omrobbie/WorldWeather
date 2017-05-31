@@ -6,7 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,10 +33,16 @@ public class WeatherDetail extends AppCompatActivity {
 
     private ArrayList<HashMap<String, String>> data;
 
+    /* deklarasi progress bar */
+    ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.weather_detail);
+
+        /* deklarasi progress bar */
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         /* setup Glide agar bisa membaca format SVG */
         RequestBuilder<PictureDrawable> requestBuilder = GlideApp.with(WeatherDetail.this)
@@ -69,6 +77,9 @@ public class WeatherDetail extends AppCompatActivity {
 
     /* buat fungsi untuk mendapatkan data JSON dari link API */
     private void getJSONData() {
+
+        /* tampilkan progress bar */
+        progressBar.setVisibility(View.VISIBLE);
 
         /* kosongkan isi data array */
         data = new ArrayList<>();
@@ -138,6 +149,9 @@ public class WeatherDetail extends AppCompatActivity {
                             RecyclerView weatherList = (RecyclerView) findViewById(R.id.WeatherList);
                             weatherList.setLayoutManager(new LinearLayoutManager(WeatherDetail.this));
                             weatherList.setAdapter(adapter);
+
+                             /* sembunyikan progress bar */
+                            progressBar.setVisibility(View.GONE);
                         }
                     }
                 },

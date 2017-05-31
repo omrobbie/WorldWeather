@@ -165,6 +165,9 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
                             RecyclerView weatherList = (RecyclerView) findViewById(R.id.WeatherList);
                             weatherList.setLayoutManager(new LinearLayoutManager(Weather.this));
                             weatherList.setAdapter(adapter);
+
+                             /* sembunyikan progress bar */
+                            progressBar.setVisibility(View.GONE);
                         }
                     }
                 },
