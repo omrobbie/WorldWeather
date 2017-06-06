@@ -72,4 +72,9 @@ Dengan memanfaatkan fungsi dari [AndroidSVG](https://bigbadaboom.github.io/andro
 ---
 
 ## Load gambar bulat :
-Tutorial untuk membuat gambar pada ImageView agar menjadi bulat, bisa dilihat di artikel [Induce Smile](https://inducesmile.com/android/how-to-make-circular-imageview-and-rounded-corner-imageview-in-android/ "How to make circular imageview and rounded corner imageview in android").
+Tutorial untuk membuat gambar pada ImageView agar menjadi bulat, bisa dilihat di artikel [How to make circular imageview and rounded corner imageview in android - Induce Smile](https://inducesmile.com/android/how-to-make-circular-imageview-and-rounded-corner-imageview-in-android/ "Baca artikel How to make circular imageview and rounded corner imageview in android").
+
+---
+
+## Fitur pencarian nama negara
+Nemu tutorial yang gampang di ikutin, bisa diliat di artikel [Filtering a RecyclerView with Custom Objects - CoderzHeaven](http://www.coderzheaven.com/2016/05/13/filtering-a-recyclerview-with-custom-objects/ "Baca artikel Filtering a RecyclerView with Custom Objects").
