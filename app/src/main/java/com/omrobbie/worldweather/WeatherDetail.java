@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -29,12 +30,17 @@ import java.util.HashMap;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
-public class WeatherDetail extends AppCompatActivity {
+public class WeatherDetail extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     private ArrayList<HashMap<String, String>> data;
+    private String sAlpha2Code;
+    private String sCapital;
 
     /* deklarasi progress bar */
     ProgressBar progressBar;
+
+    /* deklarasi search view */
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +49,9 @@ public class WeatherDetail extends AppCompatActivity {
 
         /* deklarasi progress bar */
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
+        /* deklarasi search view */
+        searchView = (SearchView) findViewById(R.id.searchView);
 
         /* setup Glide agar bisa membaca format SVG */
         RequestBuilder<PictureDrawable> requestBuilder = GlideApp.with(WeatherDetail.this)
@@ -53,11 +62,11 @@ public class WeatherDetail extends AppCompatActivity {
                 .listener(new SvgSoftwareLayerSetter());
 
         /* masukkan data intent ke variable */
-        String int_alpha2Code = getIntent().getStringExtra("alpha2Code");
         String int_flag = getIntent().getStringExtra("flag");
         String int_name = getIntent().getStringExtra("name");
-        String int_capital = getIntent().getStringExtra("capital");
         String int_nativeName = getIntent().getStringExtra("nativeName");
+        sAlpha2Code = getIntent().getStringExtra("alpha2Code");
+        sCapital = getIntent().getStringExtra("capital");
 
         /* deklarasikan semua komponen yang dipakai di dalam layout */
         ImageView imgFlag = (ImageView) findViewById(R.id.imgFlag);
@@ -67,16 +76,30 @@ public class WeatherDetail extends AppCompatActivity {
 
         /* masukkan data variable ke komponen */
         requestBuilder.load(Uri.parse(int_flag)).into(imgFlag);
-        txtCountry.setText(int_name + " (" + int_alpha2Code + ")");
-        txtCapital.setText(int_capital);
+        txtCountry.setText(int_name + " (" + sAlpha2Code + ")");
+        txtCapital.setText(sCapital);
         txtLanguage.setText(int_nativeName);
 
         /* panggil fungsi untuk mengambil data API */
         getJSONData();
+
+        /* setup search view */
+        searchView.setIconifiedByDefault(false);
+        searchView.setOnQueryTextListener(WeatherDetail.this);
+        searchView.setSubmitButtonEnabled(true);
+        searchView.setQueryHint(sCapital);
+    }
+
+    /* buat fungsi overloading untuk optional parameter */
+    private void getJSONData() {
+        getJSONData("");
     }
 
     /* buat fungsi untuk mendapatkan data JSON dari link API */
-    private void getJSONData() {
+    private void getJSONData(String cityName) {
+
+        /* check if city name value */
+        if(cityName == null) cityName = sCapital;
 
         /* tampilkan progress bar */
         progressBar.setVisibility(View.VISIBLE);
@@ -86,7 +109,7 @@ public class WeatherDetail extends AppCompatActivity {
 
         /* deklarasi penggunaan volley untuk REST Weather API */
         RequestQueue requestQueue = Volley.newRequestQueue(WeatherDetail.this);
-        String urlAPI = "http://api.openweathermap.org/data/2.5/forecast?q=" + getIntent().getStringExtra("capital") + ","+ getIntent().getStringExtra("alpha2Code") +"&appid=c2818357c736d789a6086696fc8d9b30";
+        String urlAPI = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + ","+ sAlpha2Code +"&appid=c2818357c736d789a6086696fc8d9b30";
 
         /* meminta respon berupa string dari urlAPI */
         StringRequest stringRequest = new StringRequest(Request.Method.GET, urlAPI,
@@ -166,5 +189,35 @@ public class WeatherDetail extends AppCompatActivity {
 
         /* masukkan data request kedalam request queue */
         requestQueue.add(stringRequest);
+    }
+
+    /**
+     * Called when the user submits the query. This could be due to a key press on the
+     * keyboard or due to pressing a submit button.
+     * The listener can override the standard behavior by returning true
+     * to indicate that it has handled the submit request. Otherwise return false to
+     * let the SearchView handle the submission by launching any associated intent.
+     *
+     * @param query the query text that is to be submitted
+     * @return true if the query has been handled by the listener, false to let the
+     * SearchView perform the default action.
+     */
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        getJSONData(query);
+        return true;
+    }
+
+    /**
+     * Called when the query text is changed by the user.
+     *
+     * @param newText the new content of the query text field.
+     * @return false if the SearchView should perform the default action of showing any
+     * suggestions if available, true if the action was handled by the listener.
+     */
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        if (newText.equals("")) getJSONData();
+        return true;
     }
 }
