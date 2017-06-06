@@ -53,12 +53,13 @@
         </LinearLayout>
     </LinearLayout>
 
-    <EditText
+    <android.support.v7.widget.SearchView
+        android:id="@+id/svCountryName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:hint="Search country name"
-        android:textSize="18sp"/>
+        android:layout_margin="8dp">
+
+    </android.support.v7.widget.SearchView>
 
     <ProgressBar
         android:id="@+id/progressBar"

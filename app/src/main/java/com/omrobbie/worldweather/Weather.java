@@ -6,10 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.NumberPicker;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,13 +30,16 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Weather extends AppCompatActivity implements WeatherAdapter.ItemClickListener {
+public class Weather extends AppCompatActivity implements WeatherAdapter.ItemClickListener, SearchView.OnQueryTextListener {
 
     private WeatherAdapter adapter;
     private ArrayList<HashMap<String, String>> data;
 
-    /* deklarasikan progress bar */
-    ProgressBar progressBar;
+    /* deklarasi progress bar */
+    private ProgressBar progressBar;
+
+    /* deklarasi search view */
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +55,9 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
 
         /* deklarasi progress bar */
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
+        /* deklarasi search view */
+        searchView = (SearchView) findViewById(R.id.svCountryName);
 
         /* panggil data user dari shared preferences */
         final SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences("userprefs", MODE_PRIVATE);
@@ -76,6 +82,12 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
                 finish();
             }
         });
+
+        /* setup search view */
+        searchView.setIconifiedByDefault(false);
+        searchView.setOnQueryTextListener(Weather.this);
+        searchView.setSubmitButtonEnabled(false);
+        searchView.setQueryHint("Search country name...");
     }
 
     /* implementasikan onItemClick dari WeatherAdapter */
@@ -182,5 +194,34 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
 
         /* masukkan data request kedalam request queue */
         requestQueueCountries.add(stringRequestCountries);
+    }
+
+    /**
+     * Called when the user submits the query. This could be due to a key press on the
+     * keyboard or due to pressing a submit button.
+     * The listener can override the standard behavior by returning true
+     * to indicate that it has handled the submit request. Otherwise return false to
+     * let the SearchView handle the submission by launching any associated intent.
+     *
+     * @param query the query text that is to be submitted
+     * @return true if the query has been handled by the listener, false to let the
+     * SearchView perform the default action.
+     */
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    /**
+     * Called when the query text is changed by the user.
+     *
+     * @param newText the new content of the query text field.
+     * @return false if the SearchView should perform the default action of showing any
+     * suggestions if available, true if the action was handled by the listener.
+     */
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        adapter.setFilter(newText);
+        return true;
     }
 }

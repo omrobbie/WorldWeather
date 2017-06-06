@@ -1,15 +1,18 @@
 package com.omrobbie.worldweather;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.PictureDrawable;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.RequestBuilder;
 
@@ -20,7 +23,7 @@ import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOption
 
 public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHolder> {
 
-    private ArrayList<HashMap<String, String>> data = new ArrayList<>();
+    private ArrayList<HashMap<String, String>> data, dataFilter;
     private LayoutInflater inflater;
     private Context context;
     private RequestBuilder<PictureDrawable> requestBuilder;
@@ -31,6 +34,10 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
         WeatherAdapter.this.inflater = LayoutInflater.from(context);
         WeatherAdapter.this.data = data;
         WeatherAdapter.this.context = context;
+
+        /* setup data filter untuk ditampilkan pertama kali */
+        WeatherAdapter.this.dataFilter = new ArrayList<>();
+        WeatherAdapter.this.dataFilter.addAll(WeatherAdapter.this.data);
 
         /* setup Glide agar bisa membaca format SVG */
         requestBuilder = GlideApp.with(context)
@@ -97,7 +104,7 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
      */
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        HashMap<String, String> item = data.get(position);
+        HashMap<String, String> item = dataFilter.get(position);
 
         /* masukkan data ke semua komponen */
         requestBuilder.load(Uri.parse(item.get("flag"))).into(holder.imgFlag);
@@ -112,16 +119,44 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
      */
     @Override
     public int getItemCount() {
-        return data.size();
+        return (null != dataFilter ? dataFilter.size() : 0);
+    }
+
+    public void setFilter(final String filter) {
+
+        /* searching could be complex, so, dispatch it to different thread */
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                dataFilter.clear();
+
+                if(TextUtils.isEmpty(filter)) {
+                    dataFilter.addAll(data);
+                } else {
+                    for(HashMap<String, String> item : data) {
+                        if(item.get("name").toLowerCase().contains(filter.toLowerCase())) {
+                            dataFilter.add(item);
+                        }
+                    }
+                }
+
+                /* setup UI Thread to inform about data changes */
+                ((Activity) context).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        notifyDataSetChanged();
+                    }
+                });
+            }
+        }).start();
     }
 
     /* setup inner class view untuk inflater listitem layout */
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public ImageView imgFlag;
-        public TextView txtCountry;
-        public TextView txtPopulation;
-        public TextView txtLanguage;
+        protected ImageView imgFlag;
+        protected TextView txtCountry;
+        protected TextView txtPopulation;
 
         /* setup constructor untuk inner class ViewHolder */
         public ViewHolder(View itemView) {
