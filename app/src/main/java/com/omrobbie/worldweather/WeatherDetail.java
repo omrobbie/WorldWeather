@@ -28,6 +28,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static android.R.attr.x;
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 public class WeatherDetail extends AppCompatActivity implements SearchView.OnQueryTextListener {
@@ -40,7 +41,7 @@ public class WeatherDetail extends AppCompatActivity implements SearchView.OnQue
     ProgressBar progressBar;
 
     /* deklarasi search view */
-    private SearchView searchView;
+    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +100,7 @@ public class WeatherDetail extends AppCompatActivity implements SearchView.OnQue
     private void getJSONData(String cityName) {
 
         /* check if city name value */
-        if(cityName == null) cityName = sCapital;
+        if(cityName.equals("")) cityName = sCapital;
 
         /* tampilkan progress bar */
         progressBar.setVisibility(View.VISIBLE);
@@ -123,6 +124,12 @@ public class WeatherDetail extends AppCompatActivity implements SearchView.OnQue
 
                             /* ambil keseluruhan data dari response */
                             JSONArray jsonArray = (JSONArray) jsonObject.get("list");
+
+                            /* ambil data nama kota */
+                            JSONObject dataCity = (JSONObject) jsonObject.get("city");
+
+                            /* tulis nama kota di search view */
+                            searchView.setQuery(dataCity.getString("name"), false);
 
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject itemWeather = (JSONObject) jsonArray.get(i);
@@ -217,7 +224,6 @@ public class WeatherDetail extends AppCompatActivity implements SearchView.OnQue
      */
     @Override
     public boolean onQueryTextChange(String newText) {
-        if (newText.equals("")) getJSONData();
-        return true;
+        return false;
     }
 }
