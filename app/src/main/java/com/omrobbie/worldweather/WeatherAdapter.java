@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.RequestBuilder;
 
@@ -194,7 +193,7 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
 
     /* deklarasi getter event untuk data array (bikin manual, tanpa autocomplete) */
     public HashMap<String, String> getData(int id) {
-        HashMap<String, String> item = data.get(id);
+        HashMap<String, String> item = dataFilter.get(id);
         return item;
     }
 }
