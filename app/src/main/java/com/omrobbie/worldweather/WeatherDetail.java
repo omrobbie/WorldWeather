@@ -1,5 +1,6 @@
 package com.omrobbie.worldweather;
 
+import android.content.Intent;
 import android.graphics.drawable.PictureDrawable;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -28,7 +30,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static android.R.attr.x;
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 public class WeatherDetail extends AppCompatActivity implements SearchView.OnQueryTextListener {
@@ -36,6 +37,7 @@ public class WeatherDetail extends AppCompatActivity implements SearchView.OnQue
     private ArrayList<HashMap<String, String>> data;
     private String sAlpha2Code;
     private String sCapital;
+    private String sCityName;
 
     /* deklarasi progress bar */
     ProgressBar progressBar;
@@ -54,6 +56,9 @@ public class WeatherDetail extends AppCompatActivity implements SearchView.OnQue
         /* deklarasi search view */
         searchView = (SearchView) findViewById(R.id.searchView);
 
+        /* deklarasi tombol chat */
+        Button btnChat = (Button) findViewById(R.id.btnChat);
+
         /* setup Glide agar bisa membaca format SVG */
         RequestBuilder<PictureDrawable> requestBuilder = GlideApp.with(WeatherDetail.this)
                 .as(PictureDrawable.class)
@@ -63,8 +68,8 @@ public class WeatherDetail extends AppCompatActivity implements SearchView.OnQue
                 .listener(new SvgSoftwareLayerSetter());
 
         /* masukkan data intent ke variable */
-        String int_flag = getIntent().getStringExtra("flag");
-        String int_name = getIntent().getStringExtra("name");
+        final String int_flag = getIntent().getStringExtra("flag");
+        final String int_name = getIntent().getStringExtra("name");
         String int_nativeName = getIntent().getStringExtra("nativeName");
         sAlpha2Code = getIntent().getStringExtra("alpha2Code");
         sCapital = getIntent().getStringExtra("capital");
@@ -88,7 +93,19 @@ public class WeatherDetail extends AppCompatActivity implements SearchView.OnQue
         searchView.setIconifiedByDefault(false);
         searchView.setOnQueryTextListener(WeatherDetail.this);
         searchView.setSubmitButtonEnabled(true);
-        searchView.setQueryHint(sCapital);
+        searchView.setQueryHint("Search by city name...");
+
+        /* intent ke layout chat saat tombol btnChat di klik */
+        btnChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(WeatherDetail.this, Chat.class);
+                intent.putExtra("name", int_name);
+                intent.putExtra("alpha2Code", sAlpha2Code);
+                intent.putExtra("cityName", sCityName);
+                startActivity(intent);
+            }
+        });
     }
 
     /* buat fungsi overloading untuk optional parameter */
@@ -129,7 +146,8 @@ public class WeatherDetail extends AppCompatActivity implements SearchView.OnQue
                             JSONObject dataCity = (JSONObject) jsonObject.get("city");
 
                             /* tulis nama kota di search view */
-                            searchView.setQuery(dataCity.getString("name"), false);
+                            sCityName = dataCity.getString("name");
+                            searchView.setQuery(sCityName, false);
 
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject itemWeather = (JSONObject) jsonArray.get(i);

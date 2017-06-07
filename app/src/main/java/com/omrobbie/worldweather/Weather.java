@@ -87,7 +87,7 @@ public class Weather extends AppCompatActivity implements WeatherAdapter.ItemCli
         searchView.setIconifiedByDefault(false);
         searchView.setOnQueryTextListener(Weather.this);
         searchView.setSubmitButtonEnabled(false);
-        searchView.setQueryHint("Search country name...");
+        searchView.setQueryHint("Search by country name...");
     }
 
     /* implementasikan onItemClick dari WeatherAdapter */

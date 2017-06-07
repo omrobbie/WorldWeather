@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1039502302474",
+    "firebase_url": "https://worldweather-ff734.firebaseio.com",
+    "project_id": "worldweather-ff734",
+    "storage_bucket": "worldweather-ff734.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1039502302474:android:6e8f166255439c1d",
+        "android_client_info": {
+          "package_name": "com.omrobbie.worldweather"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1039502302474-k0a1n1ejpa5h7h013ahjogo2rakj7hmj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.omrobbie.worldweather",
+            "certificate_hash": "975eac42816f0c465853f65bf327cf56d31b19fa"
+          }
+        },
+        {
+          "client_id": "1039502302474-r9ggv78tmarakfqvg0icl9s3gafbgqs1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUBaQ93IX_g_TuX4LkqbYlT8SBZ0cwXo4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1039502302474-r9ggv78tmarakfqvg0icl9s3gafbgqs1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
