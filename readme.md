@@ -78,3 +78,8 @@ Tutorial untuk membuat gambar pada ImageView agar menjadi bulat, bisa dilihat di
 
 ## Fitur pencarian nama negara
 Nemu tutorial yang gampang di ikutin, bisa diliat di artikel [Filtering a RecyclerView with Custom Objects - CoderzHeaven](http://www.coderzheaven.com/2016/05/13/filtering-a-recyclerview-with-custom-objects/ "Baca artikel Filtering a RecyclerView with Custom Objects").
+
+---
+
+## Fitur chat dengan user lain dengan firebase
+Berikut contoh tutorial untuk chat dari tutplus [How to Create an Android Chat App Using Firebase](https://code.tutsplus.com/tutorials/how-to-create-an-android-chat-app-using-firebase--cms-27397 "Baca artikel How to Create an Android Chat App Using Firebase").
