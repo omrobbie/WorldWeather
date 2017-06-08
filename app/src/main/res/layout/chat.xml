@@ -138,12 +138,20 @@
             android:layout_height="wrap_content"/>
     </android.support.design.widget.TextInputLayout>
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:layout_below="@id/lblInfo"/>
+
     <ListView
         android:id="@+id/ChatList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="48dp"
         android:dividerHeight="16dp"
-        android:divider="@android:color/transparent"
         android:layout_below="@id/lblInfo"/>
 </RelativeLayout>

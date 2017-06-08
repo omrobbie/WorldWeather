@@ -99,11 +99,15 @@ public class WeatherDetail extends AppCompatActivity implements SearchView.OnQue
         btnChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(WeatherDetail.this, Chat.class);
-                intent.putExtra("name", int_name);
-                intent.putExtra("alpha2Code", sAlpha2Code);
-                intent.putExtra("cityName", sCityName);
-                startActivity(intent);
+                if(sCityName == null) {
+                    Toast.makeText(WeatherDetail.this, "You have to insert city name!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(WeatherDetail.this, Chat.class);
+                    intent.putExtra("name", int_name);
+                    intent.putExtra("alpha2Code", sAlpha2Code);
+                    intent.putExtra("cityName", sCityName);
+                    startActivity(intent);
+                }
             }
         });
     }
